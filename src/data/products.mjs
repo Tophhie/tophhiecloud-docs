@@ -24,6 +24,15 @@
 /** @type {Product[]} */
 export const products = [
 	{
+		name: 'Marvelist',
+		href: '/marvelist/',
+		directory: 'marvelist',
+		icon: 'approve-check',
+		description:
+			'Tasks, notes, lists and event planning across iPhone, iPad, Apple Watch and the web, with Marvelist AI and Premium.',
+		linkText: 'Read the Marvelist docs',
+	},
+	{
 		name: 'Tophhie Social',
 		href: '/tophhie-social/',
 		directory: 'tophhie-social',
