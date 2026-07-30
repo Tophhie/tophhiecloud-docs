@@ -9,6 +9,11 @@ Currently documents [Tophhie Social](https://docs.tophhie.cloud/tophhie-social/)
 site is built for several products side by side, each with its own sidebar, and more
 will be added as their documentation is written.
 
+Some products keep their documentation on their own site. Those are listed on the
+landing page and redirected here rather than duplicated, so `/sigil` sends readers to
+[docs.usesigil.app](https://docs.usesigil.app/). See
+[PUBLISHING.md](./PUBLISHING.md#products-documented-elsewhere).
+
 Built with [Astro](https://astro.build) and
 [Starlight](https://starlight.astro.build), deployed to Cloudflare Workers Static
 Assets, and styled from the Tophhie Cloud Design System.
@@ -142,3 +147,19 @@ to maintain by hand.
 
 `public/robots.txt` points crawlers at the same sitemap. If the domain ever changes,
 that URL is hardcoded there and needs updating alongside `site`.
+
+Note that Cloudflare prepends its own Managed Content block to `robots.txt` at the
+zone level, so the file served is that block followed by ours. The `Sitemap:`
+directive and `Allow: /` survive, but the served file will not match the one on disk.
+
+### Redirects
+
+`public/_redirects` holds
+[Workers Static Assets redirect rules](https://developers.cloudflare.com/workers/static-assets/redirects/),
+used to point product paths at documentation hosted elsewhere. Anything in `public/`
+is copied to the deployed asset root, which is `dist/client`, so the rules apply to
+the live site.
+
+They do not apply under `astro dev` or `astro preview`, because they are a Cloudflare
+feature rather than an Astro one. To test them locally, build first and then run
+`npx wrangler dev`.

@@ -22,6 +22,25 @@ export default defineConfig({
 
       favicon: '/favicon.ico',
 
+      head: [
+        {
+          tag: 'script',
+          attrs: {
+            async: true,
+            src: 'https://www.googletagmanager.com/gtag/js?id=G-JPCMVH5TDL',
+          },
+        },
+        {
+          tag: 'script',
+          content: [
+            'window.dataLayer = window.dataLayer || [];',
+            'function gtag(){dataLayer.push(arguments);}',
+            "gtag('js', new Date());",
+            "gtag('config', 'G-JPCMVH5TDL');",
+          ].join('\n'),
+        },
+      ],
+
       // The repo is public and open to PRs, so every page gets an "Edit page"
       // link straight to its source file on GitHub. The branch is `master`, which
       // is this repo's default rather than `main`.

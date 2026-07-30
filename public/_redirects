@@ -1,0 +1,13 @@
+# Cloudflare Workers Static Assets redirect rules.
+# https://developers.cloudflare.com/workers/static-assets/redirects/
+#
+# Sigil keeps its documentation on its own Starlight site, so /sigil here is a
+# signpost rather than a section. Both rules send readers to the Sigil docs home
+# rather than mapping deep paths across, because the path structures are not
+# guaranteed to match and a wrong guess would 404 on a site we do not control.
+#
+# These are 302s. Change to 301 if the arrangement is settled and you want search
+# engines to treat it as permanent, bearing in mind browsers cache 301s hard.
+
+/sigil    https://docs.usesigil.app/  302
+/sigil/*  https://docs.usesigil.app/  302

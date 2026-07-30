@@ -19,6 +19,7 @@ route in.
 - [Local setup](#local-setup)
 - [Frontmatter reference](#frontmatter-reference)
 - [Sections (products)](#sections-products)
+- [Products documented elsewhere](#products-documented-elsewhere)
 - [Subsections](#subsections)
 - [Articles](#articles)
 - [Controlling order](#controlling-order)
@@ -259,6 +260,42 @@ export default defineConfig({
 
 Then update the `directory` in the sidebar config and every internal link that
 pointed at the old path.
+
+### Products documented elsewhere
+
+Some products already have their own documentation site. Those are not duplicated
+here. They are listed on the landing page and redirected, which means no folder under
+`src/content/docs/` and no entry in the `sidebar` array.
+
+Sigil is the worked example. To add another product like it:
+
+1. **Add a redirect** in `public/_redirects`, covering both the bare path and
+   anything beneath it:
+
+   ```
+   /my-product    https://docs.example.com/  302
+   /my-product/*  https://docs.example.com/  302
+   ```
+
+   Both rules point at the destination's home page rather than mapping deep paths
+   with `:splat`. The two sites' path structures are not guaranteed to match, and a
+   mismatch would land readers on a 404 on a site you do not control.
+
+   Use 302 unless the arrangement is settled, because browsers cache 301s hard and a
+   wrong one is awkward to undo.
+
+2. **Add it to the landing page** at `src/content/docs/index.mdx`: a `hero.actions`
+   entry with `icon: external` and `variant: minimal`, plus a `<Card>` in the grid
+   saying where the docs live. Without this, the redirect only helps people who guess
+   the URL.
+
+Redirect rules are a Cloudflare feature rather than an Astro one, so they do nothing
+under `astro dev` or `astro preview`. Test them with `npm run build` followed by
+`npx wrangler dev`, then request the path:
+
+```bash
+curl -sI http://localhost:8788/my-product | head -2
+```
 
 ---
 
