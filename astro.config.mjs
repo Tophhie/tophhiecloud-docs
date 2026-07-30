@@ -64,6 +64,11 @@ export default defineConfig({
       // Appends the per-page contributor list under the page title.
       components: {
         PageTitle: './src/components/PageTitle.astro',
+        // The product switcher takes the LanguageSelect slot, which puts it beside
+        // the theme picker rather than crowding the logo. Starlight renders that
+        // slot in both the desktop header and the mobile menu, and this site is not
+        // multilingual so nothing is displaced.
+        LanguageSelect: './src/components/ProductSwitch.astro',
       },
 
       // The Tophhie Cloud API reference is generated from the live OpenAPI
@@ -77,7 +82,10 @@ export default defineConfig({
             sidebar: {
               label: 'Endpoint reference',
               collapsed: false,
-              operations: { badges: true, labels: 'path' },
+              // Method badges are omitted from the sidebar: with one badge per
+              // entry they crowd the paths, which are the useful part. Each
+              // operation page still shows its method beside the path.
+              operations: { badges: false, labels: 'path' },
             },
           },
         ]),

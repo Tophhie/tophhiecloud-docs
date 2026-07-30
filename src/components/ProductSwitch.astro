@@ -1,0 +1,62 @@
+---
+/**
+ * Header product switcher.
+ *
+ * With more than a couple of products, the landing page stops being a good enough
+ * switcher: getting from one product to another means going back to the root first.
+ * This puts every product one click away from any page.
+ *
+ * Options come from src/data/products.mjs, the same list that builds the sidebar and
+ * the landing page index, so a new product appears here without anyone remembering to
+ * add it. Built on Starlight's own Select so it matches the theme picker exactly.
+ *
+ * Registered as Starlight's `LanguageSelect` component. That slot sits next to the
+ * theme picker in the desktop header and again in the mobile menu, which is where a
+ * picker belongs and keeps it away from the logo. This site is not multilingual, so
+ * the slot is otherwise empty.
+ */
+import Select from '@astrojs/starlight/components/Select.astro';
+import { products } from '../data/products.mjs';
+
+const { id } = Astro.locals.starlightRoute;
+
+// The docs loader gives the root index page an empty id; everything else is prefixed
+// with its product folder.
+const currentDirectory = id.split('/')[0];
+const onAProduct = products.some((product) => product.directory === currentDirectory);
+
+const options = [
+	{
+		label: 'All products',
+		value: '/',
+		selected: !onAProduct,
+	},
+	...products.map((product) => ({
+		label: product.name,
+		value: product.href,
+		selected: product.directory === currentDirectory,
+	})),
+];
+---
+
+<tc-product-switch class="tc-product-switch">
+	<Select icon="bars" label="Select a product" options={options} width="11.5em" />
+</tc-product-switch>
+
+<script>
+	class TophhieProductSwitch extends HTMLElement {
+		constructor() {
+			super();
+			const select = this.querySelector('select');
+			select?.addEventListener('change', (event) => {
+				if (event.currentTarget instanceof HTMLSelectElement) {
+					// Values are either a root-relative path or an absolute URL for a
+					// product documented on its own site, so assign the whole href.
+					window.location.href = event.currentTarget.value;
+				}
+			});
+		}
+	}
+
+	customElements.define('tc-product-switch', TophhieProductSwitch);
+</script>
