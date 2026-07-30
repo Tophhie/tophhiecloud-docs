@@ -1,0 +1,81 @@
+---
+title: MCP Server
+description: A Model Context Protocol server giving AI assistants read-only tools for Tophhie Cloud.
+sidebar:
+  label: Overview
+  order: 0
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+The Tophhie Cloud MCP Server lets an AI assistant query Tophhie Cloud directly. Connect
+it to Claude, or any other client that speaks
+[Model Context Protocol](https://modelcontextprotocol.io), and the assistant can check a
+domain's mail security, look up Tophhie Social statistics, or read the platform policies
+without you copying anything into the conversation.
+
+| | |
+| --- | --- |
+| Endpoint | `https://mcp.tophhie.cloud/mcp` |
+| Transport | Streamable HTTP, stateless |
+| Authentication | None |
+| Tools | 9, all read-only |
+| Repository | [Tophhie/tophhie-cloud-mcp](https://github.com/Tophhie/tophhie-cloud-mcp) |
+
+<CardGrid>
+	<Card title="Connect it" icon="rocket">
+		Add the server to Claude or another MCP client.
+
+		[Getting started](/mcp/getting-started/)
+	</Card>
+	<Card title="Tools" icon="list-format">
+		All nine tools, their arguments and what they return.
+
+		[Browse the tools](/mcp/tools/)
+	</Card>
+</CardGrid>
+
+## What it can do
+
+| Area | Tools |
+| --- | --- |
+| [Domains](/mcp/tools/domains/) | Run a full DNS and mail security health check, or list Tophhie Cloud domains |
+| [Tophhie Social](/mcp/tools/tophhie-social/) | Repositories, handle availability, posting heatmap, blob storage usage |
+| [Platform](/mcp/tools/platform/) | API health and the Tophhie Cloud policy list |
+
+## Read-only, and open
+
+There is no authentication. Anyone who knows the endpoint can call it.
+
+That is a deliberate choice rather than an oversight. Every tool is read-only, and each
+one is a thin wrapper over an endpoint the
+[Tophhie Cloud API](/tophhie-api/) already serves publicly and without a key. The MCP
+server does not expose anything that was not already available at
+`api.tophhie.cloud`; it just makes it reachable by an assistant.
+
+Nothing here can change anything, and no tool accepts credentials. Do not send one any.
+
+## Try it without a client
+
+The endpoint is plain JSON-RPC over HTTP, so `curl` is enough to see what it offers:
+
+```bash
+curl -sS -X POST https://mcp.tophhie.cloud/mcp \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json, text/event-stream" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+```
+
+Calling a tool is the same shape:
+
+```bash
+curl -sS -X POST https://mcp.tophhie.cloud/mcp \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json, text/event-stream" \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call",
+       "params":{"name":"check_api_health","arguments":{}}}'
+```
+
+```json
+{"result":{"content":[{"type":"text","text":"API Health Status: ok"}]},"jsonrpc":"2.0","id":2}
+```

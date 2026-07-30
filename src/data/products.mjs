@@ -43,6 +43,15 @@ export const products = [
 		linkText: 'Read the API docs',
 	},
 	{
+		name: 'MCP Server',
+		href: '/mcp/',
+		directory: 'mcp',
+		icon: 'server',
+		description:
+			'A Model Context Protocol server at mcp.tophhie.cloud, giving AI assistants read-only tools for Tophhie Cloud domains, policies and Tophhie Social.',
+		linkText: 'Read the MCP docs',
+	},
+	{
 		name: 'Tophhie Cloud Account',
 		href: '/account/',
 		directory: 'account',
