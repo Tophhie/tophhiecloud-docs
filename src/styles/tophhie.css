@@ -1,0 +1,302 @@
+/*
+ * Tophhie Cloud Design System → Starlight
+ *
+ * Tokens mirrored from the design system's `colors_and_type.css` (v1.5.0).
+ * Long-form `--color-*` names are kept as `--tc-*` here so the mapping onto
+ * Starlight's own `--sl-*` properties stays readable.
+ *
+ * Dark is the default. Starlight's theme select writes `data-theme` on <html>,
+ * the same attribute the design system uses, so the two agree out of the box.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+	/* Brand */
+	--tc-accent: #e8005a;
+	--tc-accent-light: #ff2e7a;
+	--tc-accent-lo: rgba(232, 0, 90, 0.12);
+	--tc-accent-border: rgba(232, 0, 90, 0.35);
+	--tc-brand-deep: #100235;
+	--tc-brand-purple: #8b0060;
+
+	/* Type */
+	--tc-display: 'Nunito', 'Varela Round', sans-serif;
+
+	/* Radii + elevation */
+	--tc-radius: 8px;
+	--tc-radius-lg: 12px;
+	--tc-radius-xl: 16px;
+
+	/* Surfaces — dark */
+	--tc-bg: #121212;
+	--tc-surface: #1c1c1e;
+	--tc-surface-hi: #2a2a2c;
+	--tc-app-backdrop: #0d0d0d;
+	/* Opaque and equal to --tc-bg so the header and sidebar read as part of the
+	   page rather than as panels floating over it. */
+	--tc-nav-bg: #121212;
+	--tc-sidebar-bg: #121212;
+	--tc-fill-1: rgba(255, 255, 255, 0.04);
+	--tc-fill-2: rgba(255, 255, 255, 0.06);
+	--tc-fill-3: rgba(255, 255, 255, 0.09);
+	--tc-divider: rgba(255, 255, 255, 0.07);
+	--tc-border-subtle: rgba(255, 255, 255, 0.08);
+	--tc-border: rgba(255, 255, 255, 0.1);
+	--tc-border-hi: rgba(255, 255, 255, 0.18);
+
+	/* Starlight fonts */
+	--sl-font: 'DM Sans', 'Inter', sans-serif;
+	--sl-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+	/* Starlight greys — dark */
+	--sl-color-white: #ffffff;
+	--sl-color-gray-1: rgba(255, 255, 255, 0.88);
+	--sl-color-gray-2: rgba(255, 255, 255, 0.72);
+	--sl-color-gray-3: rgba(255, 255, 255, 0.5);
+	--sl-color-gray-4: rgba(255, 255, 255, 0.34);
+	--sl-color-gray-5: #2a2a2c;
+	--sl-color-gray-6: #1c1c1e;
+	--sl-color-black: #121212;
+
+	/* Starlight accent — brand pink */
+	--sl-color-accent-low: rgba(232, 0, 90, 0.18);
+	--sl-color-accent: var(--tc-accent);
+	--sl-color-accent-high: #ff8ab5;
+
+	/*
+	 * Semantic hues — dark. Starlight builds asides and badges from these:
+	 * `-low` is the tinted fill, the base is the border, `-high` is the label.
+	 * Values are the design system's semantics plus its `--alert-*-text` tier.
+	 */
+	--sl-color-green-low: rgba(34, 197, 94, 0.12);
+	--sl-color-green: #22c55e;
+	--sl-color-green-high: #bbf7d0;
+	--sl-color-blue-low: rgba(59, 130, 246, 0.12);
+	--sl-color-blue: #3b82f6;
+	--sl-color-blue-high: #bfdbfe;
+	--sl-color-orange-low: rgba(245, 158, 11, 0.12);
+	--sl-color-orange: #f59e0b;
+	--sl-color-orange-high: #fde68a;
+	--sl-color-red-low: rgba(239, 68, 68, 0.12);
+	--sl-color-red: #ef4444;
+	--sl-color-red-high: #fecdd3;
+	--sl-color-purple-low: rgba(139, 0, 96, 0.14);
+	--sl-color-purple: var(--tc-brand-purple);
+	--sl-color-purple-high: #ff8ab5;
+
+	--sl-color-text: var(--sl-color-gray-2);
+	--sl-color-text-accent: var(--sl-color-accent-high);
+	--sl-color-bg: var(--tc-bg);
+	--sl-color-bg-nav: var(--tc-nav-bg);
+	--sl-color-bg-sidebar: var(--tc-sidebar-bg);
+	--sl-color-bg-inline-code: var(--tc-fill-3);
+	--sl-color-hairline-light: var(--tc-border);
+	--sl-color-hairline: var(--tc-border-subtle);
+	--sl-color-hairline-shade: var(--tc-divider);
+	--sl-color-backdrop-overlay: rgba(0, 0, 0, 0.8);
+
+	/* Elevation — dark */
+	--sl-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+	--sl-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+	--sl-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+:root[data-theme='light'] {
+	/* Surfaces — light */
+	--tc-bg: #f4f2fa;
+	--tc-surface: #ffffff;
+	--tc-surface-hi: #ece7f6;
+	--tc-app-backdrop: #ece8f5;
+	/* The design system's --header-bg/--sidebar-bg are translucent white, which
+	   reads as a white slab against this page's lavender backdrop. Use the page
+	   colour, opaque, so the chrome disappears instead. */
+	--tc-nav-bg: #f4f2fa;
+	--tc-sidebar-bg: #f4f2fa;
+	--tc-fill-1: rgba(16, 2, 53, 0.04);
+	--tc-fill-2: rgba(16, 2, 53, 0.055);
+	--tc-fill-3: rgba(16, 2, 53, 0.08);
+	--tc-divider: rgba(16, 2, 53, 0.08);
+	--tc-border-subtle: rgba(16, 2, 53, 0.09);
+	--tc-border: rgba(16, 2, 53, 0.1);
+	--tc-border-hi: rgba(16, 2, 53, 0.16);
+	--tc-accent-lo: rgba(232, 0, 90, 0.1);
+
+	/* Starlight greys — light */
+	--sl-color-white: #100235;
+	--sl-color-gray-1: rgba(16, 2, 53, 0.88);
+	--sl-color-gray-2: rgba(16, 2, 53, 0.72);
+	--sl-color-gray-3: rgba(16, 2, 53, 0.55);
+	--sl-color-gray-4: rgba(16, 2, 53, 0.42);
+	--sl-color-gray-5: #d9d2ea;
+	--sl-color-gray-6: #ece7f6;
+	--sl-color-gray-7: #f7f5fc;
+	--sl-color-black: #ffffff;
+
+	--sl-color-accent-low: rgba(232, 0, 90, 0.1);
+	--sl-color-accent: var(--tc-accent);
+	--sl-color-accent-high: #a30040;
+
+	/* Semantic hues — light. Same tints, with the design system's dark
+	   `--alert-*-text` values so labels stay legible on a light fill. */
+	--sl-color-green-low: rgba(34, 197, 94, 0.14);
+	--sl-color-green: #22c55e;
+	--sl-color-green-high: #166534;
+	--sl-color-blue-low: rgba(59, 130, 246, 0.12);
+	--sl-color-blue: #3b82f6;
+	--sl-color-blue-high: #1e40af;
+	--sl-color-orange-low: rgba(245, 158, 11, 0.16);
+	--sl-color-orange: #f59e0b;
+	--sl-color-orange-high: #92400e;
+	--sl-color-red-low: rgba(239, 68, 68, 0.12);
+	--sl-color-red: #ef4444;
+	--sl-color-red-high: #9f1239;
+	--sl-color-purple-low: rgba(139, 0, 96, 0.1);
+	--sl-color-purple: var(--tc-brand-purple);
+	--sl-color-purple-high: #8b0060;
+
+	--sl-color-text-accent: var(--sl-color-accent);
+	--sl-color-hairline-shade: var(--tc-divider);
+
+	/* Elevation — light */
+	--sl-shadow-sm: 0 1px 3px rgba(16, 2, 53, 0.08);
+	--sl-shadow-md: 0 4px 16px rgba(16, 2, 53, 0.1);
+	--sl-shadow-lg: 0 8px 32px rgba(16, 2, 53, 0.14);
+}
+
+/* The design system asks for a backdrop slightly deeper than --bg so the
+   surface colour never flashes during load. */
+html,
+body {
+	background: var(--tc-app-backdrop);
+}
+
+/* Nunito carries the display tier: headings and branded elements. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.site-title,
+site-title a {
+	font-family: var(--tc-display);
+	font-weight: 700;
+	letter-spacing: -0.02em;
+}
+
+/* Flat header + sidebar. The design system's app shell frosts both; here the fill
+   is opaque and matches --sl-color-bg so the chrome reads as part of the page.
+   Opaque matters: the header is sticky, so a translucent fill with no blur would
+   let content scroll through it.
+   The one piece of structure kept is the header's bottom hairline, which runs the
+   full width to separate it from both the sidebar and the content.
+   Must be `header.header`, not `.header`: that class is also on the header's inner
+   content row (which would draw a second, inset hairline under the logo) and on
+   Expressive Code's `figcaption.header` code-block titles. */
+header.header {
+	backdrop-filter: none;
+	border-bottom: 1px solid var(--tc-border);
+}
+
+#starlight__sidebar,
+.sidebar-pane {
+	backdrop-filter: none;
+	border-inline-end: 1px solid var(--tc-border-subtle);
+}
+
+/* Sidebar section overlines: 10px / 700 / 0.12em, muted. */
+.sidebar-content .top-level > li > details > summary > .group-label > span,
+.sidebar-content .top-level > li > span.large {
+	font-family: var(--tc-display);
+	font-size: 0.6875rem;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--sl-color-gray-3);
+}
+
+/* Active nav item: pink tint fill + border + pink label. */
+.sidebar-content a[aria-current='page'],
+.sidebar-content a[aria-current='page']:hover,
+.sidebar-content a[aria-current='page']:focus {
+	background: var(--tc-accent-lo);
+	border: 1px solid var(--tc-accent-border);
+	border-radius: var(--tc-radius);
+	color: var(--sl-color-white);
+	font-weight: 600;
+}
+
+.sidebar-content a:hover,
+.sidebar-content a:focus-visible {
+	border-radius: var(--tc-radius);
+}
+
+/* Cards and asides pick up the surface + radius scale. */
+.card,
+.starlight-aside {
+	border-radius: var(--tc-radius-lg);
+}
+
+.card {
+	background: var(--tc-surface);
+	border: 1px solid var(--tc-border);
+	box-shadow: var(--sl-shadow-sm);
+	transition: border-color 150ms ease-out, box-shadow 150ms ease-out;
+}
+
+.card:hover {
+	border-color: var(--tc-accent-border);
+	box-shadow: var(--sl-shadow-md);
+}
+
+.card .title {
+	font-family: var(--tc-display);
+}
+
+/* Links shift to brand pink on hover. */
+.sl-markdown-content a:not(:where(.not-content *)):hover {
+	color: var(--tc-accent-light);
+}
+
+/* Code blocks and tables sit on the surface tier. */
+.expressive-code .frame pre,
+.sl-markdown-content table {
+	border-radius: var(--tc-radius);
+}
+
+/* Buttons in hero actions: brand pink primary, neutral secondary. */
+.action.primary,
+.sl-link-button.primary {
+	background: var(--tc-accent);
+	color: #ffffff;
+	border-radius: var(--tc-radius);
+	box-shadow: inset 0 0 0 1px rgba(232, 0, 90, 0.3);
+}
+
+.action.primary:hover,
+.sl-link-button.primary:hover {
+	background: var(--tc-accent-light);
+	color: #ffffff;
+}
+
+.action.minimal,
+.sl-link-button.minimal,
+.sl-link-button.secondary {
+	border-radius: var(--tc-radius);
+}
+
+/* Search: keep the frosted treatment consistent with the header. */
+site-search dialog {
+	background: var(--tc-surface);
+	border: 1px solid var(--tc-border-hi);
+	border-radius: var(--tc-radius-xl);
+	box-shadow: var(--sl-shadow-lg);
+}
+
+/* Micro-interactions stay on clean ease-out, 150–200ms. */
+a,
+button,
+.card {
+	transition-timing-function: ease-out;
+}

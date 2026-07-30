@@ -1,13 +1,21 @@
 {
 	"$schema": "./node_modules/wrangler/config-schema.json",
-	"compatibility_date": "2026-07-30",
-	"compatibility_flags": ["global_fetch_strictly_public"],
+	"compatibility_date": "2026-07-29",
+	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
 	"name": "tophhiecloud-docs",
 	"main": "@astrojs/cloudflare/entrypoints/server",
 	"assets": {
 		"directory": "./dist",
 		"binding": "ASSETS"
 	},
+	// docs.tophhie.cloud must already exist as a zone on the Cloudflare account.
+	// Wrangler attaches the custom domain on first deploy.
+	"routes": [
+		{
+			"pattern": "docs.tophhie.cloud",
+			"custom_domain": true
+		}
+	],
 	"observability": {
 		"enabled": true
 	}

@@ -1,40 +1,51 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
-template: splash # Remove or comment out this line to display the site sidebar on this page.
+title: Tophhie Cloud Docs
+description: Documentation and guides for every Tophhie Cloud product.
+template: splash
 hero:
-  tagline: Congrats on setting up a new Starlight project!
-  image:
-    file: ../../assets/houston.webp
+  tagline: Guides, references and troubleshooting for every Tophhie Cloud product.
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: Sigil
+      link: /sigil/
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
-      icon: external
+    - text: Tophhie Social
+      link: /tophhie-social/
+      icon: right-arrow
+      variant: minimal
+    - text: Immich
+      link: /immich/
+      icon: right-arrow
       variant: minimal
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Next steps
+## Product docs
 
-<CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
+Each product has its own documentation set. Pick one to jump straight into its
+sidebar — search covers the whole knowledge base regardless of where you are.
+
+<CardGrid>
+	<Card title="Sigil" icon="seti:lock">
+		Guides for installing, configuring and operating Sigil.
+
+		[Read the Sigil docs →](/sigil/)
 	</Card>
-	<Card title="Change page layout" icon="document">
-		Delete `template: splash` in `src/content/docs/index.mdx` to display a
-		sidebar on this page.
+	<Card title="Tophhie Social" icon="comment">
+		The self-hosted ATProto PDS at `pds.tophhie.cloud` — accounts, handles and
+		federation.
+
+		[Read the Tophhie Social docs →](/tophhie-social/)
 	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
-	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
+	<Card title="Immich" icon="seti:image">
+		Self-hosted photo and video library — uploads, clients and maintenance.
+
+		[Read the Immich docs →](/immich/)
 	</Card>
 </CardGrid>
+
+## Finding things
+
+Search from the box in the header, or press <kbd>/</kbd>. Results are drawn from
+every product at once, so you do not need to know which product owns an answer
+before you look for it.
