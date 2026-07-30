@@ -22,6 +22,17 @@ export default defineConfig({
 
       favicon: '/favicon.ico',
 
+      // The repo is public and open to PRs, so every page gets an "Edit page"
+      // link straight to its source file on GitHub. Branch is `master` — the
+      // repo's default — not `main`.
+      editLink: {
+        baseUrl: 'https://github.com/Tophhie/tophhiecloud-docs/edit/master/',
+      },
+
+      // Shows when a page was last touched, from git history. Useful on a docs
+      // site anyone can contribute to.
+      lastUpdated: true,
+
       customCss: ['./src/styles/tophhie.css'],
 
       // Scopes the sidebar below to the current product. See the file for details.
@@ -34,8 +45,8 @@ export default defineConfig({
       social: [
         {
           icon: 'github',
-          label: 'GitHub',
-          href: 'https://github.com/tophhie',
+          label: 'Source on GitHub',
+          href: 'https://github.com/Tophhie/tophhiecloud-docs',
         },
       ],
 

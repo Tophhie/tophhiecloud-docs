@@ -6,10 +6,15 @@ site structure, and the sidebar is generated from it.
 
 Read this before adding, editing, or removing content.
 
+**Anyone can contribute.** This repository is public and pull requests are welcome
+from outside the Tophhie Cloud org — see [Contributing](#contributing) for the
+quickest route in.
+
 ---
 
 ## Contents
 
+- [Contributing](#contributing)
 - [The three levels](#the-three-levels)
 - [Local setup](#local-setup)
 - [Frontmatter reference](#frontmatter-reference)
@@ -21,6 +26,66 @@ Read this before adding, editing, or removing content.
 - [Deleting content safely](#deleting-content-safely)
 - [Checks before you open a PR](#checks-before-you-open-a-pr)
 - [Deployment](#deployment)
+
+---
+
+## Contributing
+
+The repository is <https://github.com/Tophhie/tophhiecloud-docs> and its default
+branch is **`master`**, not `main`.
+
+### Fixing one page
+
+You do not need to clone anything. Every page on the site has an **Edit page** link
+at the foot that opens that page's Markdown file in the GitHub editor. GitHub forks
+the repo for you, and the "Propose changes" button opens the pull request.
+
+That is the right route for typos, broken links, stale version numbers, and
+clarifications — most contributions.
+
+### Larger changes
+
+Clone (or fork) and work locally, so you can see the result before proposing it:
+
+```bash
+git clone https://github.com/Tophhie/tophhiecloud-docs.git
+```
+
+```bash
+cd tophhiecloud-docs && npm install
+```
+
+Then follow [Local setup](#local-setup). Work on a branch, not `master`:
+
+```bash
+git switch -c docs/what-you-are-changing
+```
+
+Before opening the PR, run through [Checks before you open a
+PR](#checks-before-you-open-a-pr). The important one is `npm run build` — it is the
+test suite, and a PR that fails it cannot be merged.
+
+### What gets merged
+
+- **Corrections** — wrong commands, dead links, changed behaviour. Always welcome.
+- **Clarifications** — a step that assumed knowledge a reader does not have.
+- **New articles** in an existing section. Follow the house style under
+  [Articles](#articles).
+- **New sections** (a whole product) — open an issue first. These need a config
+  change and a decision about whether the product belongs here.
+
+Two things that will be sent back:
+
+- **Secrets in a diff.** Document the variable name and what it does; never the
+  value. See [Frontmatter reference](#frontmatter-reference) and the caution under
+  [Articles](#articles).
+- **Invented specifics.** If you do not know the real port, path, or flag, say so
+  in the PR rather than guessing. A `TODO` is more useful than a plausible wrong
+  answer.
+
+Not sure a change is wanted? [Open an
+issue](https://github.com/Tophhie/tophhiecloud-docs/issues/new) and ask before
+writing it.
 
 ---
 
