@@ -131,3 +131,14 @@ output served from Cloudflare Workers Static Assets, with the `docs.tophhie.clou
 custom domain declared in [`wrangler.jsonc`](./wrangler.jsonc).
 
 Search is rebuilt at deploy time, so a new page only becomes searchable once deployed.
+
+### Sitemap
+
+Starlight generates a sitemap on every build, because `site` is set in
+`astro.config.mjs`. The file to submit to Google Search Console is
+<https://docs.tophhie.cloud/sitemap-index.xml>, which points at `sitemap-0.xml`
+holding every public URL. New pages are picked up automatically, so there is nothing
+to maintain by hand.
+
+`public/robots.txt` points crawlers at the same sitemap. If the domain ever changes,
+that URL is hardcoded there and needs updating alongside `site`.
