@@ -5,9 +5,9 @@
 The knowledge base for Tophhie Cloud products, live at
 **<https://docs.tophhie.cloud>**.
 
-Currently documents [Tophhie Social](https://docs.tophhie.cloud/tophhie-social/). The
-site is built for several products side by side, each with its own sidebar, and more
-will be added as their documentation is written.
+Currently documents [Tophhie Social](https://docs.tophhie.cloud/tophhie-social/) and
+the [Tophhie Cloud API](https://docs.tophhie.cloud/tophhie-api/). Each product has its
+own sidebar, and more will be added as their documentation is written.
 
 Some products keep their documentation on their own site. Those are listed on the
 landing page and redirected here rather than duplicated, so `/sigil` sends readers to
@@ -69,17 +69,23 @@ request. It also rebuilds the search index.
 
 ```
 ├── PUBLISHING.md                   ← authoring guide, read this to write docs
-├── astro.config.mjs                ← site config, one sidebar entry per product
+├── astro.config.mjs                ← site config; sidebar is built from products.mjs
 ├── wrangler.jsonc                  ← Cloudflare Worker and docs.tophhie.cloud domain
 ├── public/
+│   ├── _redirects                  ← redirects for products hosted elsewhere
+│   ├── robots.txt
 │   └── favicon.ico
 └── src/
-    ├── assets/brand/               ← logo variants, light and dark wordmarks
+    ├── assets/brand/               ← logo variants and the logomark
+    ├── components/                 ← PageTitle override and the contributor list
     ├── content/
     │   ├── docs/
-    │   │   ├── index.mdx           ← site root, the product switcher
-    │   │   └── tophhie-social/     ← one folder per product
+    │   │   ├── index.mdx           ← site root, the product index
+    │   │   ├── tophhie-social/     ← one folder per product
+    │   │   └── tophhie-api/        ← guides; its reference is generated
     │   └── content.config.ts
+    ├── data/products.mjs           ← every product, sidebar and landing page both use it
+    ├── integrations/contributors.mjs
     ├── starlightRouteData.ts       ← per-product sidebar scoping
     └── styles/tophhie.css          ← design system tokens mapped onto Starlight
 ```
@@ -90,6 +96,18 @@ folder needs an `index.md`. See
 [PUBLISHING.md](./PUBLISHING.md#the-three-levels).
 
 ## How a few things work
+
+### Products are declared in one place
+
+`src/data/products.mjs` is the single source of truth for what exists. The sidebar in
+`astro.config.mjs` and the product index on the landing page are both built from it,
+so a product cannot be navigable but undiscoverable, or listed but unreachable. Adding
+one means adding one entry.
+
+Products documented on their own site, such as Sigil, have an absolute `href` and no
+`directory`. They get a landing page card but no sidebar group. Their redirects live
+separately in `public/_redirects`, which is a Cloudflare file rather than something
+Astro can generate.
 
 ### Per-product sidebars
 

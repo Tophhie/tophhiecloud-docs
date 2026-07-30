@@ -202,8 +202,12 @@ search is how most people arrive.
 ## Sections (products)
 
 A section is a product. Adding one is a two-step change: create the folder, then
-register it in the config. Both steps are required, because a folder with no config
-entry produces pages with no sidebar.
+register the product. Both steps are required, because a folder that is not
+registered produces pages with no sidebar and no way to find them.
+
+Registration happens in one place, `src/data/products.mjs`. Both the sidebar and the
+landing page's product index are built from it, so a product cannot end up navigable
+but undiscoverable, or listed but unreachable.
 
 ### Add a section
 
@@ -233,25 +237,27 @@ entry produces pages with no sidebar.
 
    `sidebar.order: 0` keeps the landing page pinned above the subsections.
 
-2. **Register it in `astro.config.mjs`.** Add one entry to the `sidebar` array:
+2. **Register it in `src/data/products.mjs`.** Add one entry to the `products`
+   array, in the position you want it to appear:
 
    ```js
-   sidebar: [
-     // …existing products
-     {
-       label: 'My Product',
-       collapsed: true,
-       items: [{ autogenerate: { directory: 'my-product' } }],
-     },
-   ],
+   {
+     name: 'My Product',
+     href: '/my-product/',
+     directory: 'my-product',
+     icon: 'rocket',
+     description: 'One or two sentences for the card on the landing page.',
+     linkText: 'Read the My Product docs',
+   },
    ```
 
-   The `label` is what readers see. The `directory` **must exactly match the
-   folder name**, because that string is how `src/starlightRouteData.ts` works out
-   which sidebar belongs to which URL.
+   `directory` **must exactly match the folder name**, because that string is how
+   `src/starlightRouteData.ts` works out which sidebar belongs to which URL. `icon`
+   is any [Starlight icon name](https://starlight.astro.build/reference/icons/).
 
-3. **Add it to the product switcher** at `src/content/docs/index.mdx`, adding both a
-   `hero.actions` entry and a `<Card>`. Nothing does this automatically.
+   That is the whole registration. The sidebar group and the landing page card are
+   both generated from this entry, so there is no third step and nothing else to keep
+   in sync.
 
 ### Rename a section
 
@@ -294,10 +300,22 @@ Sigil is the worked example. To add another product like it:
    Use 302 unless the arrangement is settled, because browsers cache 301s hard and a
    wrong one is awkward to undo.
 
-2. **Add it to the landing page** at `src/content/docs/index.mdx`: a `hero.actions`
-   entry with `icon: external` and `variant: minimal`, plus a `<Card>` in the grid
-   saying where the docs live. Without this, the redirect only helps people who guess
-   the URL.
+2. **Add it to `src/data/products.mjs`** with an absolute `href` and **no
+   `directory`**:
+
+   ```js
+   {
+     name: 'My Product',
+     href: 'https://docs.example.com/',
+     icon: 'external',
+     description: 'What it is, and a note that its docs live on their own site.',
+     linkText: 'Go to docs.example.com',
+   },
+   ```
+
+   Omitting `directory` is what marks it as hosted elsewhere: it gets a card on the
+   landing page but no sidebar group, because there are no pages here to put in one.
+   Without this entry the redirect only helps people who already guess the URL.
 
 Redirect rules are a Cloudflare feature rather than an Astro one, so they do nothing
 under `astro dev` or `astro preview`. Test them with `npm run build` followed by
@@ -538,11 +556,10 @@ never named there.
 
 **Deleting a section.** Delete the folder, **and**:
 
-1. Remove its entry from the `sidebar` array in `astro.config.mjs`. A stale entry
-   pointing at a missing directory will fail the build.
-2. Remove its `hero.actions` entry and its `<Card>` from
-   `src/content/docs/index.mdx`.
-3. Add redirects for the section's URLs if they were public.
+1. Remove its entry from `src/data/products.mjs`. A stale entry pointing at a missing
+   directory will fail the build. Removing it also takes the card off the landing
+   page, since both come from that one entry.
+2. Add redirects for the section's URLs if they were public.
 
 ---
 

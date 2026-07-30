@@ -10,34 +10,32 @@ hero:
     alt: The Tophhie Cloud logomark
     file: ../../assets/brand/logomark.png
   actions:
-    - text: Tophhie Social
-      link: /tophhie-social/
-      icon: right-arrow
-    - text: Sigil
-      link: https://docs.usesigil.app/
-      icon: external
-      variant: minimal
+    - text: Browse the products
+      link: '#product-docs'
+      icon: down-arrow
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
+import { products } from '../../data/products.mjs';
 
 ## Product docs
 
+Each product documented here has its own sidebar, so you only ever see the pages
+belonging to whatever you are reading. Search works the other way round and covers
+everything at once.
+
 <CardGrid>
-	<Card title="Tophhie Social" icon="comment">
-		A UK-hosted AT Protocol server, the network Bluesky runs on. Sign up for a
-		handle, bring an account across from Bluesky, or read how the server and its
-		infrastructure work.
+	{
+		products.map((product) => (
+			<Card title={product.name} icon={product.icon}>
+				{product.description}
 
-		[Getting started](/tophhie-social/getting-started/) ·
-		[Technical](/tophhie-social/technical/)
-	</Card>
-	<Card title="Sigil" icon="external">
-		Centrally managed email signatures for Microsoft 365, applied automatically as
-		people write. Sigil keeps its documentation on its own site.
-
-		[Go to docs.usesigil.app](https://docs.usesigil.app/)
-	</Card>
+				<p>
+					<a href={product.href}>{product.linkText ?? 'Read the docs'}</a>
+				</p>
+			</Card>
+		))
+	}
 </CardGrid>
 
 More products will appear here as their documentation is written, either as a section
@@ -45,12 +43,12 @@ on this site or as a link out to wherever those docs already live.
 
 ## Finding your way around
 
-Every product has its own sidebar, so you only ever see the pages belonging to
-whatever you are reading. To move between products, come back here.
+To move between products, come back to this page. The Tophhie Cloud logo in the
+header links here from anywhere on the site.
 
-Search works the other way round. It covers the whole knowledge base at once, so you
-do not need to know which product owns an answer before you look for it. Use the box
-in the header or press <kbd>/</kbd>.
+Search covers the whole knowledge base at once, so you do not need to know which
+product owns an answer before you look for it. Use the box in the header or press
+<kbd>/</kbd>.
 
 ## Contributing
 

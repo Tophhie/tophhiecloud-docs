@@ -5,6 +5,7 @@ import starlight from '@astrojs/starlight';
 import cloudflare from '@astrojs/cloudflare';
 import { contributors } from './src/integrations/contributors.mjs';
 import starlightOpenAPI, { openAPISidebarGroups } from 'starlight-openapi';
+import { localProducts } from './src/data/products.mjs';
 
 // https://astro.build/config
 export default defineConfig({
@@ -97,32 +98,27 @@ export default defineConfig({
         },
       ],
 
-      // One top-level group per product. `src/starlightRouteData.ts` keeps only
-      // the group matching the current URL's first segment and promotes its
-      // children to the top level, so a product's pages never show another
-      // product's tree. Add a product by adding an entry here whose `directory`
-      // matches its folder under src/content/docs/. See PUBLISHING.md.
+      // One top-level group per product, built from src/data/products.mjs so the
+      // sidebar and the landing page's product index cannot disagree.
+      // `src/starlightRouteData.ts` then keeps only the group matching the current
+      // URL's first segment and promotes its children to the top level, so a
+      // product's pages never show another product's tree.
+      //
+      // To add a product, add it to src/data/products.mjs. See PUBLISHING.md.
       //
       // Ordering inside each product comes from folder structure plus
       // `sidebar.order` in page frontmatter. A folder inherits the lowest
       // `order` of the pages it contains, so setting `sidebar.order` on a
       // subsection's index.md positions the whole subsection.
-      sidebar: [
-        {
-          label: 'Tophhie Social',
-          collapsed: true,
-          items: [{ autogenerate: { directory: 'tophhie-social' } }],
-        },
-        {
-          label: 'Tophhie Cloud API',
-          collapsed: true,
-          items: [
-            { autogenerate: { directory: 'tophhie-api' } },
-            // Replaced at build time by the generated reference groups.
-            ...openAPISidebarGroups,
-          ],
-        },
-      ],
+      sidebar: localProducts.map((product) => ({
+        label: product.name,
+        collapsed: true,
+        items: [
+          { autogenerate: { directory: product.directory } },
+          // Replaced at build time by the generated reference groups.
+          ...(product.reference ? openAPISidebarGroups : []),
+        ],
+      })),
     }),
   ],
 
