@@ -28,7 +28,7 @@
 	--tc-radius-lg: 12px;
 	--tc-radius-xl: 16px;
 
-	/* Surfaces — dark */
+	/* Surfaces: dark */
 	--tc-bg: #121212;
 	--tc-surface: #1c1c1e;
 	--tc-surface-hi: #2a2a2c;
@@ -49,7 +49,7 @@
 	--sl-font: 'DM Sans', 'Inter', sans-serif;
 	--sl-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
-	/* Starlight greys — dark */
+	/* Starlight greys: dark */
 	--sl-color-white: #ffffff;
 	--sl-color-gray-1: rgba(255, 255, 255, 0.88);
 	--sl-color-gray-2: rgba(255, 255, 255, 0.72);
@@ -59,13 +59,13 @@
 	--sl-color-gray-6: #1c1c1e;
 	--sl-color-black: #121212;
 
-	/* Starlight accent — brand pink */
+	/* Starlight accent: brand pink */
 	--sl-color-accent-low: rgba(232, 0, 90, 0.18);
 	--sl-color-accent: var(--tc-accent);
 	--sl-color-accent-high: #ff8ab5;
 
 	/*
-	 * Semantic hues — dark. Starlight builds asides and badges from these:
+	 * Semantic hues, dark. Starlight builds asides and badges from these:
 	 * `-low` is the tinted fill, the base is the border, `-high` is the label.
 	 * Values are the design system's semantics plus its `--alert-*-text` tier.
 	 */
@@ -96,14 +96,14 @@
 	--sl-color-hairline-shade: var(--tc-divider);
 	--sl-color-backdrop-overlay: rgba(0, 0, 0, 0.8);
 
-	/* Elevation — dark */
+	/* Elevation: dark */
 	--sl-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
 	--sl-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
 	--sl-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
 :root[data-theme='light'] {
-	/* Surfaces — light */
+	/* Surfaces: light */
 	--tc-bg: #f4f2fa;
 	--tc-surface: #ffffff;
 	--tc-surface-hi: #ece7f6;
@@ -122,7 +122,7 @@
 	--tc-border-hi: rgba(16, 2, 53, 0.16);
 	--tc-accent-lo: rgba(232, 0, 90, 0.1);
 
-	/* Starlight greys — light */
+	/* Starlight greys: light */
 	--sl-color-white: #100235;
 	--sl-color-gray-1: rgba(16, 2, 53, 0.88);
 	--sl-color-gray-2: rgba(16, 2, 53, 0.72);
@@ -137,7 +137,7 @@
 	--sl-color-accent: var(--tc-accent);
 	--sl-color-accent-high: #a30040;
 
-	/* Semantic hues — light. Same tints, with the design system's dark
+	/* Semantic hues, light. Same tints, with the design system's dark
 	   `--alert-*-text` values so labels stay legible on a light fill. */
 	--sl-color-green-low: rgba(34, 197, 94, 0.14);
 	--sl-color-green: #22c55e;
@@ -158,7 +158,7 @@
 	--sl-color-text-accent: var(--sl-color-accent);
 	--sl-color-hairline-shade: var(--tc-divider);
 
-	/* Elevation — light */
+	/* Elevation: light */
 	--sl-shadow-sm: 0 1px 3px rgba(16, 2, 53, 0.08);
 	--sl-shadow-md: 0 4px 16px rgba(16, 2, 53, 0.1);
 	--sl-shadow-lg: 0 8px 32px rgba(16, 2, 53, 0.14);
@@ -294,7 +294,7 @@ site-search dialog {
 	box-shadow: var(--sl-shadow-lg);
 }
 
-/* Micro-interactions stay on clean ease-out, 150–200ms. */
+/* Micro-interactions stay on clean ease-out, 150 to 200ms. */
 a,
 button,
 .card {

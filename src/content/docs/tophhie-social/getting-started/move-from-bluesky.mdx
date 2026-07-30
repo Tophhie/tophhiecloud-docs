@@ -1,0 +1,107 @@
+---
+title: Move from Bluesky
+description: Migrate an existing Bluesky account to Tophhie Social, keeping your identity, posts and followers.
+sidebar:
+  order: 5
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+If you already have an account on Bluesky's servers, you can move it here instead of
+starting again. Migration keeps your DID, so you keep your posts, your followers and
+everyone you follow.
+
+## What you need
+
+Your current handle and password. Access to the email address on the account, because
+the old server emails you a confirmation token partway through and the migration
+cannot finish without it. Your two-factor code, if you have 2FA enabled. And the name
+you want here, since your handle becomes `<name>.tophhie.social`.
+
+## Before you start
+
+:::caution
+Account migration carries real risk. It rewrites the identity record that points at
+your server, and a failed migration can leave an account in a broken state that needs
+manual repair. Do not migrate an account you cannot afford to disrupt without reading
+the warnings in the tool.
+:::
+
+Export your data from Bluesky first if you have anything you would hate to lose. Then
+give yourself twenty uninterrupted minutes rather than doing this on a phone on a
+train, because you need to be able to reach your email halfway through.
+
+## Migrate with PDS MOOver
+
+Use [PDS MOOver](https://pdsmoover.com/), a well-established third-party migration
+tool. It runs entirely in your browser, so your password is not sent to Tophhie Social
+or to PDS MOOver's servers.
+
+<Steps>
+
+1. Open [pdsmoover.com](https://pdsmoover.com/) and choose the Moover tool.
+
+2. Enter your current handle and current password.
+
+   The password you enter also becomes the password on your migrated account.
+
+3. Fill in the destination:
+
+   | Field | Value |
+   | --- | --- |
+   | New PDS URL | `https://pds.tophhie.cloud` |
+   | New Handle | `<your-name>.tophhie.social` |
+   | New Email | the email address you want on the account here |
+   | Invite Code | leave blank, because Tophhie Social does not require one |
+
+4. Read the disclaimer, confirm you understand the risks, and start the migration.
+
+5. When prompted, fetch the PLC token that your old server emails you and enter it.
+   This is the step that actually moves your identity across, and it will not proceed
+   without the token.
+
+6. Once it reports success, sign in with your new handle. See
+   [Choose a client](/tophhie-social/getting-started/choose-a-client/).
+
+</Steps>
+
+## After migrating
+
+<Steps>
+
+1. Check your images came across. Blobs, meaning images and video, sometimes lag
+   behind the rest of a migration. PDS MOOver's Missing Blobs tool finds anything that
+   did not transfer so you can pull it over.
+
+2. Deactivate the old account. Leaving it active can confuse the network about where
+   your repository lives, and PDS MOOver's Turn Off helper handles this.
+
+3. Check your profile and settings. Your profile should have travelled with you.
+   Tophhie Social's own preferences are at
+   [profile.tophhie.social](https://profile.tophhie.social/).
+
+</Steps>
+
+If you would rather keep your own domain as your handle than take a
+`.tophhie.social` one, you can switch after migrating. See
+[Use your own domain](/tophhie-social/getting-started/use-your-own-domain/).
+
+## Coming from a third-party server
+
+The same tool and the same destination values apply if you are moving from a PDS other
+than Bluesky's. If anything looks unusual, email
+[help@tophhie.cloud](mailto:help@tophhie.cloud) before migrating rather than after.
+
+## If it goes wrong
+
+Email [help@tophhie.cloud](mailto:help@tophhie.cloud) with your handle, your DID if
+you know it, and what the tool reported. Include the step it failed on, because
+recovery differs a lot depending on whether the identity record was updated before the
+failure.
+
+## Further reading
+
+[PDS MOOver's info page](https://pdsmoover.com/info) explains what each of its tools
+does, including its free automated backup service.
+[Account Migration](https://atproto.com/guides/account-migration) is the AT Protocol
+specification's own guide, if you want to understand the underlying steps.

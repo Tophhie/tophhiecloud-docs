@@ -2,32 +2,33 @@
 
 [![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
 
-The knowledge base for every Tophhie Cloud product, live at
+The knowledge base for Tophhie Cloud products, live at
 **<https://docs.tophhie.cloud>**.
 
-Currently documents [Tophhie Social](https://docs.tophhie.cloud/tophhie-social/).
-The site is built for several products side by side — each gets its own sidebar —
-and more will be added as their documentation is written.
+Currently documents [Tophhie Social](https://docs.tophhie.cloud/tophhie-social/). The
+site is built for several products side by side, each with its own sidebar, and more
+will be added as their documentation is written.
 
-Built with [Astro](https://astro.build) + [Starlight](https://starlight.astro.build),
-deployed to Cloudflare Workers Static Assets, and styled from the Tophhie Cloud
-Design System.
+Built with [Astro](https://astro.build) and
+[Starlight](https://starlight.astro.build), deployed to Cloudflare Workers Static
+Assets, and styled from the Tophhie Cloud Design System.
 
 ## Contributing
 
-**This repo is public and pull requests are welcome from anyone.**
+This repo is public and pull requests are welcome from anyone.
 
-For a typo, a dead link, or a clarification, use the **Edit page** link at the foot
-of any page on the site — it opens that page's Markdown file in the GitHub editor
-and GitHub handles the fork and the PR. No local setup needed.
+For a typo, a dead link, or a clarification, use the **Edit page** link at the foot of
+any page on the site. It opens that page's Markdown file in the GitHub editor, and
+GitHub handles the fork and the pull request for you, so there is no local setup
+needed.
 
-For anything larger, read **[PUBLISHING.md](./PUBLISHING.md)**. It is the authoring
-guide: how to add, edit and remove sections, subsections and articles, the
+For anything larger, read [PUBLISHING.md](./PUBLISHING.md). It is the authoring guide,
+covering how to add, edit and remove sections, subsections and articles, plus the
 frontmatter reference, sidebar ordering, house style, and the checks to run before
-opening a PR.
+opening a pull request.
 
-Not sure a change is wanted?
-[Open an issue](https://github.com/Tophhie/tophhiecloud-docs/issues/new) first.
+If you are not sure a change is wanted,
+[open an issue](https://github.com/Tophhie/tophhiecloud-docs/issues/new) first.
 
 ## Getting started
 
@@ -39,8 +40,8 @@ npm install
 npx astro dev --background
 ```
 
-Serves on <http://localhost:4321>. Background mode is the convention in this repo —
-manage it with `npx astro dev status`, `npx astro dev logs` and
+That serves on <http://localhost:4321>. Background mode is the convention in this
+repo, and you manage it with `npx astro dev status`, `npx astro dev logs` and
 `npx astro dev stop`.
 
 ## Commands
@@ -50,66 +51,74 @@ manage it with `npx astro dev status`, `npx astro dev logs` and
 | `npm install` | Install dependencies |
 | `npx astro dev --background` | Dev server on `localhost:4321` (preferred) |
 | `npm run dev` | Dev server in the foreground |
-| `npm run build` | Build to `./dist/` — **this is the test suite** |
-| `npm run preview` | Build, then preview locally |
+| `npm run build` | Build to `./dist/`, and the closest thing this repo has to a test suite |
+| `npm run preview` | Build, then preview locally. Search only works here, not in dev |
 | `npm run deploy` | Build and deploy to Cloudflare |
 | `npm run cf-typegen` | Regenerate `worker-configuration.d.ts` from `wrangler.jsonc` |
 
-`npm run build` fails on broken content — bad frontmatter, a sidebar entry pointing
-at a missing directory, a missing image. Run it before opening a PR. It also
-rebuilds the search index.
+`npm run build` fails on broken content, including bad frontmatter, a sidebar entry
+pointing at a missing directory, or a missing image. Run it before opening a pull
+request. It also rebuilds the search index.
 
 ## Project structure
 
 ```
-├── PUBLISHING.md                   ← authoring guide — read this to write docs
-├── astro.config.mjs                ← site config: one sidebar entry per product
-├── wrangler.jsonc                  ← Cloudflare Worker + docs.tophhie.cloud domain
+├── PUBLISHING.md                   ← authoring guide, read this to write docs
+├── astro.config.mjs                ← site config, one sidebar entry per product
+├── wrangler.jsonc                  ← Cloudflare Worker and docs.tophhie.cloud domain
 ├── public/
 │   └── favicon.ico
 └── src/
-    ├── assets/brand/               ← logo variants (light + dark wordmarks)
+    ├── assets/brand/               ← logo variants, light and dark wordmarks
     ├── content/
     │   ├── docs/
-    │   │   ├── index.mdx           ← site root: product switcher
+    │   │   ├── index.mdx           ← site root, the product switcher
     │   │   └── tophhie-social/     ← one folder per product
     │   └── content.config.ts
     ├── starlightRouteData.ts       ← per-product sidebar scoping
-    └── styles/tophhie.css          ← design system tokens → Starlight
+    └── styles/tophhie.css          ← design system tokens mapped onto Starlight
 ```
 
-The folder layout under `src/content/docs/` *is* the site structure — a top-level
-folder is a product, a nested folder is a subsection, and a `.md` file is an
-article. Every folder needs an `index.md`. See
+The folder layout under `src/content/docs/` is the site structure. A top-level folder
+is a product, a nested folder is a subsection, and a `.md` file is an article. Every
+folder needs an `index.md`. See
 [PUBLISHING.md](./PUBLISHING.md#the-three-levels).
 
 ## How a few things work
 
-**Per-product sidebars.** Starlight has no built-in multi-sidebar, so
-`astro.config.mjs` declares one autogenerated group per product and
-[`src/starlightRouteData.ts`](./src/starlightRouteData.ts) — a Starlight
-[route middleware](https://starlight.astro.build/guides/route-data/) — keeps only
-the group matching the current URL's first segment and promotes its children to the
-top level. So `/tophhie-social/*` shows Tophhie Social's tree and nothing else, and
-a second product will not leak into it. The same middleware
-rewrites folder names into readable group labels (`getting-started` → "Getting
-started") and recomputes prev/next so pagination cannot walk from one product into
-another.
+### Per-product sidebars
+
+Starlight has no built-in multi-sidebar, so `astro.config.mjs` declares one
+autogenerated group per product and
+[`src/starlightRouteData.ts`](./src/starlightRouteData.ts) keeps only the group
+matching the current URL's first segment, promoting its children to the top level.
+That means `/tophhie-social/*` shows Tophhie Social's tree and nothing else, and a
+second product will not leak into it. It is a Starlight
+[route middleware](https://starlight.astro.build/guides/route-data/).
+
+The same middleware rewrites folder names into readable group labels, turning
+`getting-started` into "Getting started", and recomputes prev/next so pagination
+cannot walk from one product into another.
 
 You should not need to touch it to write docs.
 
-**Search.** Pagefind, built from the rendered HTML at build time. It indexes every
-product as one corpus, so a single search box covers the whole knowledge base
-regardless of which product's sidebar the reader is in. Search only works in a
-production build — `npm run preview`, not `astro dev`.
+### Search
 
-**Design.** Tokens in [`src/styles/tophhie.css`](./src/styles/tophhie.css) are
-mirrored from the Tophhie Cloud Design System's `colors_and_type.css` and mapped
-onto Starlight's `--sl-*` properties: Nunito for display, DM Sans for body,
-JetBrains Mono for code, brand pink as the accent, and a neutral base with full
-light and dark themes. If the design system changes upstream, update that one file
-rather than styling pages individually. Both themes must work — never hardcode a
-colour that only reads in one.
+Pagefind, built from the rendered HTML at build time. It indexes every product as one
+corpus, so a single search box covers the whole knowledge base regardless of which
+product's sidebar the reader is in. Search only works in a production build, so use
+`npm run preview` rather than `astro dev` to test it.
+
+### Design
+
+Tokens in [`src/styles/tophhie.css`](./src/styles/tophhie.css) are mirrored from the
+Tophhie Cloud Design System's `colors_and_type.css` and mapped onto Starlight's
+`--sl-*` properties: Nunito for display, DM Sans for body, JetBrains Mono for code,
+brand pink as the accent, and a neutral base with full light and dark themes.
+
+If the design system changes upstream, update that one file rather than styling pages
+individually. Both themes have to work, so never hardcode a colour that only reads in
+one.
 
 ## Deployment
 
@@ -117,10 +126,8 @@ colour that only reads in one.
 npm run deploy
 ```
 
-Runs `astro build` then `wrangler deploy`. The site is fully prerendered static
-output served from Cloudflare Workers Static Assets, with the
-`docs.tophhie.cloud` custom domain declared in
-[`wrangler.jsonc`](./wrangler.jsonc).
+That runs `astro build` then `wrangler deploy`. The site is fully prerendered static
+output served from Cloudflare Workers Static Assets, with the `docs.tophhie.cloud`
+custom domain declared in [`wrangler.jsonc`](./wrangler.jsonc).
 
-Note that search is rebuilt at deploy time, so a new page only becomes searchable
-once deployed.
+Search is rebuilt at deploy time, so a new page only becomes searchable once deployed.

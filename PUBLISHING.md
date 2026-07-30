@@ -1,14 +1,14 @@
 # Publishing to the Tophhie Cloud knowledge base
 
 Everything on <https://docs.tophhie.cloud> comes from Markdown files in
-`src/content/docs/`. There is no CMS and no database — the folder layout *is* the
-site structure, and the sidebar is generated from it.
+`src/content/docs/`. There is no CMS and no database. The folder layout is the site
+structure, and the sidebar is generated from it.
 
 Read this before adding, editing, or removing content.
 
-**Anyone can contribute.** This repository is public and pull requests are welcome
-from outside the Tophhie Cloud org — see [Contributing](#contributing) for the
-quickest route in.
+Anyone can contribute. This repository is public and pull requests are welcome from
+outside the Tophhie Cloud org, and [Contributing](#contributing) has the quickest
+route in.
 
 ---
 
@@ -40,8 +40,8 @@ You do not need to clone anything. Every page on the site has an **Edit page** l
 at the foot that opens that page's Markdown file in the GitHub editor. GitHub forks
 the repo for you, and the "Propose changes" button opens the pull request.
 
-That is the right route for typos, broken links, stale version numbers, and
-clarifications — most contributions.
+That is the right route for typos, broken links, stale version numbers and
+clarifications, which is most contributions.
 
 ### Larger changes
 
@@ -62,17 +62,18 @@ git switch -c docs/what-you-are-changing
 ```
 
 Before opening the PR, run through [Checks before you open a
-PR](#checks-before-you-open-a-pr). The important one is `npm run build` — it is the
-test suite, and a PR that fails it cannot be merged.
+PR](#checks-before-you-open-a-pr). The important one is `npm run build`, which is the
+test suite here. A PR that fails it cannot be merged.
 
 ### What gets merged
 
-- **Corrections** — wrong commands, dead links, changed behaviour. Always welcome.
-- **Clarifications** — a step that assumed knowledge a reader does not have.
-- **New articles** in an existing section. Follow the house style under
-  [Articles](#articles).
-- **New sections** (a whole product) — open an issue first. These need a config
-  change and a decision about whether the product belongs here.
+Corrections are always welcome: wrong commands, dead links, changed behaviour. So are
+clarifications, where a step assumed knowledge a reader does not have. New articles in
+an existing section are fine too, following the house style under
+[Articles](#articles).
+
+For a new section, meaning a whole product, open an issue first. Those need a config
+change and a decision about whether the product belongs here.
 
 Two things that will be sent back:
 
@@ -101,15 +102,17 @@ Current layout:
 
 ```
 src/content/docs/
-├── index.mdx                      ← site root: the product switcher
-└── tophhie-social/                ← section
-    ├── index.md                   ← section landing page
-    ├── getting-started/           ← subsection
-    │   ├── index.md               ← subsection landing page
-    │   ├── create-an-account.md   ← article
+├── index.mdx                        ← site root: the product switcher
+└── tophhie-social/                  ← section
+    ├── index.mdx                    ← section landing page
+    ├── getting-started/             ← subsection
+    │   ├── index.md                 ← subsection landing page
+    │   ├── create-an-account.mdx    ← article
     │   └── choose-a-client.md
-    ├── accounts-and-handles/
-    └── troubleshooting/
+    └── technical/
+        ├── index.md
+        ├── how-it-works/            ← subsections can nest
+        └── infrastructure/
 ```
 
 Tophhie Social is the only section so far. The site is built to hold several
@@ -173,11 +176,11 @@ sidebar:
 | `title` | **Yes** | The `<h1>`, the browser tab title, and the default sidebar label |
 | `description` | Recommended | Meta description, and the snippet shown in search results |
 | `sidebar.label` | No | Overrides the sidebar text when `title` is too long for the nav |
-| `sidebar.order` | No | Position within its group — see [Controlling order](#controlling-order) |
+| `sidebar.order` | No | Position within its group. See [Controlling order](#controlling-order) |
 | `sidebar.badge` | No | A small pill next to the link, e.g. `New` or `Deprecated` |
 | `sidebar.hidden` | No | `true` keeps the page published and searchable but out of the sidebar |
 | `tableOfContents` | No | `false` removes the right-hand "On this page" panel |
-| `template` | No | `splash` gives a full-width page with no sidebar — used by the site root |
+| `template` | No | `splash` gives a full-width page with no sidebar, used by the site root |
 | `prev` / `next` | No | Overrides the footer pagination links |
 
 Always write a `description`. It is what a reader sees in search results, and
@@ -188,7 +191,7 @@ search is how most people arrive.
 ## Sections (products)
 
 A section is a product. Adding one is a two-step change: create the folder, then
-register it in the config. **Both steps are required** — a folder with no config
+register it in the config. Both steps are required, because a folder with no config
 entry produces pages with no sidebar.
 
 ### Add a section
@@ -214,7 +217,7 @@ entry produces pages with no sidebar.
 
    ## What's here
 
-   - **[Getting started](/my-product/getting-started/)** — install and first run.
+   - [Getting started](/my-product/getting-started/), covering install and first run.
    ```
 
    `sidebar.order: 0` keeps the landing page pinned above the subsections.
@@ -233,10 +236,10 @@ entry produces pages with no sidebar.
    ```
 
    The `label` is what readers see. The `directory` **must exactly match the
-   folder name** — that string is how `src/starlightRouteData.ts` works out which
-   sidebar belongs to which URL.
+   folder name**, because that string is how `src/starlightRouteData.ts` works out
+   which sidebar belongs to which URL.
 
-3. **Add it to the product switcher** at `src/content/docs/index.mdx` — both a
+3. **Add it to the product switcher** at `src/content/docs/index.mdx`, adding both a
    `hero.actions` entry and a `<Card>`. Nothing does this automatically.
 
 ### Rename a section
@@ -261,7 +264,7 @@ pointed at the old path.
 
 ## Subsections
 
-Subsections need no config change at all — they are picked up from the folder
+Subsections need no config change at all, because they are picked up from the folder
 structure. This is the normal way to grow a section.
 
 ### Add a subsection
@@ -284,9 +287,9 @@ sidebar:
 What this subsection covers, then links to its articles.
 ```
 
-The sidebar group label comes from the folder name, converted to sentence case —
-`accounts-and-handles` renders as **Accounts and handles**. You do not need to
-configure the label; name the folder well and it follows.
+The sidebar group label comes from the folder name, converted to sentence case, so
+`accounts-and-handles` renders as "Accounts and handles". You do not need to configure
+the label. Name the folder well and it follows.
 
 ### Nesting deeper
 
@@ -370,7 +373,7 @@ one can be slotted in without renumbering:
 | `tophhie-social/troubleshooting/common-issues.md` | `21` |
 
 To move a subsection, change the `order` on its `index.md` and leave its articles
-alone — as long as no article in it has a *lower* order than the index page.
+alone, as long as no article in it has a lower order than the index page.
 
 ---
 
@@ -392,8 +395,8 @@ relatively so Astro optimises and hashes them:
 ![The handle settings screen](./handle-settings.png)
 ```
 
-Never link a brand asset from `src/assets/brand/` in body copy — those belong to
-the header and the design system.
+Never link a brand asset from `src/assets/brand/` in body copy. Those belong to the
+header and the design system.
 
 **Components** need an `.mdx` file and an import:
 
@@ -450,8 +453,8 @@ engine that indexed it, gets a 404.
    ```
 
 3. If it was genuinely retired with no replacement, prefer marking it deprecated
-   over deleting — a page explaining that something is gone is more use than a
-   404:
+   over deleting, because a page explaining that something is gone is more use than
+   a 404:
 
    ```markdown
    ---
@@ -468,7 +471,7 @@ engine that indexed it, gets a 404.
    ```
 
 **Deleting a subsection.** Delete the folder, then run the `grep` above for the
-subsection path. Nothing in `astro.config.mjs` needs changing — subsections are
+subsection path. Nothing in `astro.config.mjs` needs changing, because subsections are
 never named there.
 
 **Deleting a section.** Delete the folder, **and**:
@@ -487,9 +490,9 @@ never named there.
 npm run build
 ```
 
-The build is the test suite. It fails on broken content — a bad frontmatter
-field, a sidebar entry pointing at a directory that does not exist, an image that
-is not there. It also rebuilds the Pagefind search index; the log line reporting
+The build is the test suite here. It fails on broken content: a bad frontmatter field,
+a sidebar entry pointing at a directory that does not exist, an image that is not
+there. It also rebuilds the Pagefind search index, and the log line reporting
 how many HTML files were indexed should match the page count.
 
 Then read your work in a browser:
@@ -501,7 +504,7 @@ npx astro dev --background
 Check:
 
 - [ ] The page appears in the sidebar, in the position you intended.
-- [ ] Only its own product's tree is in the sidebar — no other product's pages.
+- [ ] Only its own product's tree is in the sidebar, with no other product's pages.
 - [ ] The prev/next links at the foot of the page stay inside the product.
 - [ ] Search finds the page by a phrase from its body, not just its title.
 - [ ] It reads correctly in **both** light and dark themes (use the header
@@ -525,7 +528,7 @@ the `docs.tophhie.cloud` custom domain declared in `wrangler.jsonc`.
 Notes:
 
 - **Search is built at deploy time.** Pagefind indexes the built HTML, so a page
-  is only searchable after a deploy. It indexes every product as one corpus — a
+  is only searchable after a deploy. It indexes every product as one corpus, so a
   single search box covers the whole knowledge base regardless of which product's
   sidebar the reader is looking at.
 - **Design comes from the Tophhie Cloud Design System.** Tokens live in

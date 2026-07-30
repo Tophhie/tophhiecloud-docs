@@ -1,0 +1,82 @@
+---
+title: Create an account
+description: Sign up for a Tophhie Social account and pick your handle.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Sign-ups are open and you do not need an invite code.
+
+:::caution[Already on Bluesky?]
+Do not sign up here. Creating a new account gives you a new identity and leaves your
+posts and followers behind. Use
+[Move from Bluesky](/tophhie-social/getting-started/move-from-bluesky/) instead,
+which brings across the account you already have.
+:::
+
+## What you need
+
+An email address you can receive mail at, because it verifies the account and is
+then used to sign you in securely. You also need a username, which becomes your
+handle.
+
+## Sign up
+
+<Steps>
+
+1. Go to [signup.tophhie.social](https://signup.tophhie.social/).
+
+2. Choose a username. Whatever you enter becomes your full handle with
+   `.tophhie.social` on the end, so entering `alice` gives you
+   `alice.tophhie.social`.
+
+3. Enter your email address and a password.
+
+4. Read the [Terms of Service](https://trust.tophhie.cloud/policy/atproto-terms/)
+   and [Privacy Policy](https://trust.tophhie.cloud/policy/atproto-privacy-policy/),
+   then select **Create account**.
+
+5. Check your inbox for a verification email from `donotreply@tophhie.social` and
+   follow it to confirm the address.
+
+</Steps>
+
+The sign-up form is protected by [hCaptcha](https://www.hcaptcha.com/). You will
+usually not see a challenge, but it is why the form cannot be driven
+programmatically.
+
+## Signing in
+
+Sign-in happens in whichever app you use rather than on this site, so see
+[Choose a client](/tophhie-social/getting-started/choose-a-client/) next. You will
+need your handle (`alice.tophhie.social`), your password, and the server address
+`https://pds.tophhie.cloud`.
+
+### Email codes
+
+Sensitive actions are protected by email-based two-factor authentication. When you
+sign in, expect a code by email and enter it in your app. This applies to every
+account and is not something you switch on.
+
+:::tip
+If a code does not arrive, check spam for mail from `donotreply@tophhie.social`
+before contacting support. It is the most common cause.
+:::
+
+## About your handle
+
+Your handle is how people find and mention you. It is not your identity: your
+account is really identified by a DID, a permanent identifier that stays the same
+when your handle changes. That separation is what lets you move servers later
+without losing your followers, and it is explained in
+[Your account and your data](/tophhie-social/technical/how-it-works/your-account-and-data/).
+
+If you own a domain, you can use that as your handle instead. See
+[Use your own domain](/tophhie-social/getting-started/use-your-own-domain/).
+
+## Trouble signing up
+
+Email [help@tophhie.cloud](mailto:help@tophhie.cloud) with the handle you were
+trying to create and roughly when you tried.

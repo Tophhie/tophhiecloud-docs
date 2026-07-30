@@ -1,0 +1,59 @@
+---
+title: Tophhie Social
+description: Documentation for Tophhie Social, the UK-hosted AT Protocol PDS at pds.tophhie.cloud.
+sidebar:
+  label: Overview
+  order: 0
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Tophhie Social is a UK-hosted Personal Data Server (PDS) for the
+[AT Protocol](https://atproto.com), the network Bluesky runs on. It holds your
+account and your data, and connects you to everyone else on the network.
+
+Signing up gives you a handle like `alice.tophhie.social` that works in Bluesky and
+in any other AT Protocol app. You are not joining a separate walled-off service.
+You get an account on the same network, hosted here instead of by Bluesky.
+
+| | |
+| --- | --- |
+| Server | `https://pds.tophhie.cloud` |
+| Handles | `<your-name>.tophhie.social`, or a domain you own |
+| Sign-ups | Open, with no invite code |
+| Hosting | United Kingdom |
+| Support | [help@tophhie.cloud](mailto:help@tophhie.cloud) |
+
+<CardGrid>
+	<Card title="Getting started" icon="rocket">
+		Create an account, pick an app, make your first post, or move an existing
+		Bluesky account across.
+
+		[Start here](/tophhie-social/getting-started/)
+	</Card>
+	<Card title="Technical" icon="setting">
+		How the AT Protocol and this server work, what data lives where, and the
+		infrastructure behind it.
+
+		[Read the technical docs](/tophhie-social/technical/)
+	</Card>
+</CardGrid>
+
+## Your data stays yours
+
+Your identity is portable. Your account is identified by a DID rather than by a
+hostname, so if you want to move to another PDS later, including back to Bluesky,
+you take your identity, your posts and your followers with you. See
+[Leaving or moving on](/tophhie-social/technical/how-it-works/leaving-or-moving-on/).
+
+You can also delete it. Deactivating an account starts a window of roughly 14 days,
+after which the repository is deleted from the server automatically.
+
+Both of these are properties of the AT Protocol rather than favours granted by this
+server, which is most of the reason for running on it.
+
+## Terms
+
+By using Tophhie Social you agree to the
+[Terms of Service](https://trust.tophhie.cloud/policy/atproto-terms/) and the
+[Privacy Policy](https://trust.tophhie.cloud/policy/atproto-privacy-policy/).

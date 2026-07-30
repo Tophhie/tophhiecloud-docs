@@ -23,8 +23,8 @@ export default defineConfig({
       favicon: '/favicon.ico',
 
       // The repo is public and open to PRs, so every page gets an "Edit page"
-      // link straight to its source file on GitHub. Branch is `master` — the
-      // repo's default — not `main`.
+      // link straight to its source file on GitHub. The branch is `master`, which
+      // is this repo's default rather than `main`.
       editLink: {
         baseUrl: 'https://github.com/Tophhie/tophhiecloud-docs/edit/master/',
       },
@@ -54,7 +54,7 @@ export default defineConfig({
       // the group matching the current URL's first segment and promotes its
       // children to the top level, so a product's pages never show another
       // product's tree. Add a product by adding an entry here whose `directory`
-      // matches its folder under src/content/docs/ — see PUBLISHING.md.
+      // matches its folder under src/content/docs/. See PUBLISHING.md.
       //
       // Ordering inside each product comes from folder structure plus
       // `sidebar.order` in page frontmatter. A folder inherits the lowest
