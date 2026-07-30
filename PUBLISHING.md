@@ -101,18 +101,20 @@ Current layout:
 
 ```
 src/content/docs/
-├── index.mdx                  ← site root: the product switcher
-├── sigil/                     ← section
-│   ├── index.md               ← section landing page
-│   ├── getting-started/       ← subsection
-│   │   ├── index.md           ← subsection landing page
-│   │   ├── installation.md    ← article
-│   │   └── first-steps.md
-│   ├── configuration/
-│   └── troubleshooting/
-├── tophhie-social/
-└── immich/
+├── index.mdx                      ← site root: the product switcher
+└── tophhie-social/                ← section
+    ├── index.md                   ← section landing page
+    ├── getting-started/           ← subsection
+    │   ├── index.md               ← subsection landing page
+    │   ├── create-an-account.md   ← article
+    │   └── choose-a-client.md
+    ├── accounts-and-handles/
+    └── troubleshooting/
 ```
+
+Tophhie Social is the only section so far. The site is built to hold several
+products side by side, each with its own sidebar, so adding the next one is the
+routine described under [Sections (products)](#sections-products).
 
 Two rules matter more than anything else in this document:
 
@@ -157,10 +159,10 @@ Every page starts with a YAML block. Only `title` is required.
 
 ```markdown
 ---
-title: Installation
-description: Install Sigil on a supported platform.
+title: Create an account
+description: Sign up for an account on the Tophhie Social PDS.
 sidebar:
-  label: Install
+  label: Sign up
   order: 2
   badge: New
 ---
@@ -265,15 +267,15 @@ structure. This is the normal way to grow a section.
 ### Add a subsection
 
 ```bash
-mkdir -p src/content/docs/sigil/backup-and-restore
+mkdir -p src/content/docs/tophhie-social/moderation
 ```
 
-Create `src/content/docs/sigil/backup-and-restore/index.md`:
+Create `src/content/docs/tophhie-social/moderation/index.md`:
 
 ```markdown
 ---
-title: Backup and restore
-description: Back up Sigil and restore from a backup.
+title: Moderation
+description: Reporting, labels and takedowns on Tophhie Social.
 sidebar:
   label: Overview
   order: 30
@@ -283,7 +285,7 @@ What this subsection covers, then links to its articles.
 ```
 
 The sidebar group label comes from the folder name, converted to sentence case —
-`backup-and-restore` renders as **Backup and restore**. You do not need to
+`accounts-and-handles` renders as **Accounts and handles**. You do not need to
 configure the label; name the folder well and it follows.
 
 ### Nesting deeper
@@ -291,8 +293,8 @@ configure the label; name the folder well and it follows.
 Subsections can nest as far as you like. Each level needs its own `index.md`:
 
 ```
-sigil/configuration/advanced/index.md
-sigil/configuration/advanced/tuning.md
+tophhie-social/accounts-and-handles/migration/index.md
+tophhie-social/accounts-and-handles/migration/from-bluesky.md
 ```
 
 In practice, three levels below a product is usually a sign the section wants
@@ -306,8 +308,8 @@ Create a `.md` file in the relevant folder. That is the whole process.
 
 ```markdown
 ---
-title: Restoring from a backup
-description: Restore a Sigil instance from an existing backup archive.
+title: Reporting a post
+description: Report a post or account to the Tophhie Social moderators.
 sidebar:
   order: 32
 ---
@@ -328,11 +330,12 @@ How the reader confirms success.
 
 House style, briefly:
 
-- **Sentence case for headings.** "Restoring from a backup", not "Restoring From
-  A Backup". ALL CAPS only ever appears in the logo.
+- **Sentence case for headings.** "Reporting a post", not "Reporting A Post". ALL
+  CAPS only ever appears in the logo.
 - **Start `##` headings, not `#`.** The `title` frontmatter already produces the
   page's single `<h1>`.
-- **Product names are exact:** `Tophhie Cloud`, `Tophhie Social`, `Sigil`.
+- **Product names are exact:** `Tophhie Cloud`, `Tophhie Social`. Never
+  lowercase or all-caps them in body copy.
 - **Lead troubleshooting entries with the symptom**, not the cause. That is what
   readers search for.
 - **Be specific.** Avoid "seamlessly", "powerful", "simply".
@@ -357,14 +360,14 @@ one can be slotted in without renumbering:
 
 | Page | `order` |
 | --- | --- |
-| `sigil/index.md` | `0` |
-| `sigil/getting-started/index.md` | `1` |
-| `sigil/getting-started/installation.md` | `2` |
-| `sigil/getting-started/first-steps.md` | `3` |
-| `sigil/configuration/index.md` | `10` |
-| `sigil/configuration/environment-variables.md` | `11` |
-| `sigil/troubleshooting/index.md` | `20` |
-| `sigil/troubleshooting/common-issues.md` | `21` |
+| `tophhie-social/index.md` | `0` |
+| `tophhie-social/getting-started/index.md` | `1` |
+| `tophhie-social/getting-started/create-an-account.md` | `2` |
+| `tophhie-social/getting-started/choose-a-client.md` | `3` |
+| `tophhie-social/accounts-and-handles/index.md` | `10` |
+| `tophhie-social/accounts-and-handles/custom-handles.md` | `11` |
+| `tophhie-social/troubleshooting/index.md` | `20` |
+| `tophhie-social/troubleshooting/common-issues.md` | `21` |
 
 To move a subsection, change the `order` on its `index.md` and leave its articles
 alone — as long as no article in it has a *lower* order than the index page.
@@ -376,7 +379,7 @@ alone — as long as no article in it has a *lower* order than the index page.
 **Internal links** use absolute, trailing-slash paths:
 
 ```markdown
-See [Installation](/sigil/getting-started/installation/).
+See [Create an account](/tophhie-social/getting-started/create-an-account/).
 ```
 
 Root-relative paths survive page moves better than relative ones, and the
@@ -386,7 +389,7 @@ trailing slash matches what the site actually serves.
 relatively so Astro optimises and hashes them:
 
 ```markdown
-![The Sigil dashboard](./dashboard.png)
+![The handle settings screen](./handle-settings.png)
 ```
 
 Never link a brand asset from `src/assets/brand/` in body copy — those belong to
@@ -433,7 +436,7 @@ engine that indexed it, gets a 404.
 1. Search the repo for inbound links and fix them:
 
    ```bash
-   grep -rn "sigil/getting-started/installation" src/
+   grep -rn "getting-started/choose-a-client" src/
    ```
 
 2. If the content moved rather than vanished, add a redirect in
@@ -441,7 +444,8 @@ engine that indexed it, gets a 404.
 
    ```js
    redirects: {
-     '/sigil/getting-started/installation': '/sigil/installing/',
+     '/tophhie-social/getting-started/choose-a-client':
+       '/tophhie-social/clients/',
    },
    ```
 
@@ -451,7 +455,7 @@ engine that indexed it, gets a 404.
 
    ```markdown
    ---
-   title: Installation
+   title: Choose a client
    sidebar:
      badge:
        text: Deprecated
@@ -459,8 +463,7 @@ engine that indexed it, gets a 404.
    ---
 
    :::caution[Deprecated]
-   Sigil is now installed via the platform installer. See
-   [Installing](/sigil/installing/).
+   This page has moved. See [Clients](/tophhie-social/clients/).
    :::
    ```
 

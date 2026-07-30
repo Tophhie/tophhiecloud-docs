@@ -5,9 +5,9 @@
 The knowledge base for every Tophhie Cloud product, live at
 **<https://docs.tophhie.cloud>**.
 
-Currently documents [Sigil](https://docs.tophhie.cloud/sigil/),
-[Tophhie Social](https://docs.tophhie.cloud/tophhie-social/) and
-[Immich](https://docs.tophhie.cloud/immich/), with more products to follow.
+Currently documents [Tophhie Social](https://docs.tophhie.cloud/tophhie-social/).
+The site is built for several products side by side — each gets its own sidebar —
+and more will be added as their documentation is written.
 
 Built with [Astro](https://astro.build) + [Starlight](https://starlight.astro.build),
 deployed to Cloudflare Workers Static Assets, and styled from the Tophhie Cloud
@@ -72,9 +72,7 @@ rebuilds the search index.
     ├── content/
     │   ├── docs/
     │   │   ├── index.mdx           ← site root: product switcher
-    │   │   ├── sigil/              ← one folder per product
-    │   │   ├── tophhie-social/
-    │   │   └── immich/
+    │   │   └── tophhie-social/     ← one folder per product
     │   └── content.config.ts
     ├── starlightRouteData.ts       ← per-product sidebar scoping
     └── styles/tophhie.css          ← design system tokens → Starlight
@@ -92,7 +90,8 @@ article. Every folder needs an `index.md`. See
 [`src/starlightRouteData.ts`](./src/starlightRouteData.ts) — a Starlight
 [route middleware](https://starlight.astro.build/guides/route-data/) — keeps only
 the group matching the current URL's first segment and promotes its children to the
-top level. So `/sigil/*` shows Sigil's tree and nothing else. The same middleware
+top level. So `/tophhie-social/*` shows Tophhie Social's tree and nothing else, and
+a second product will not leak into it. The same middleware
 rewrites folder names into readable group labels (`getting-started` → "Getting
 started") and recomputes prev/next so pagination cannot walk from one product into
 another.

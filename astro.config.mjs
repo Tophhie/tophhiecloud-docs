@@ -12,7 +12,7 @@ export default defineConfig({
     starlight({
       title: 'Tophhie Cloud Docs',
       description:
-        'Documentation and guides for every Tophhie Cloud product — Sigil, Tophhie Social, Immich and more.',
+        'Documentation and guides for Tophhie Cloud products.',
 
       logo: {
         light: './src/assets/brand/logo-colour-on-light.png',
@@ -52,7 +52,9 @@ export default defineConfig({
 
       // One top-level group per product. `src/starlightRouteData.ts` keeps only
       // the group matching the current URL's first segment and promotes its
-      // children to the top level, so /sigil/* never shows Immich's tree.
+      // children to the top level, so a product's pages never show another
+      // product's tree. Add a product by adding an entry here whose `directory`
+      // matches its folder under src/content/docs/ — see PUBLISHING.md.
       //
       // Ordering inside each product comes from folder structure plus
       // `sidebar.order` in page frontmatter. A folder inherits the lowest
@@ -60,19 +62,9 @@ export default defineConfig({
       // subsection's index.md positions the whole subsection.
       sidebar: [
         {
-          label: 'Sigil',
-          collapsed: true,
-          items: [{ autogenerate: { directory: 'sigil' } }],
-        },
-        {
           label: 'Tophhie Social',
           collapsed: true,
           items: [{ autogenerate: { directory: 'tophhie-social' } }],
-        },
-        {
-          label: 'Immich',
-          collapsed: true,
-          items: [{ autogenerate: { directory: 'immich' } }],
         },
       ],
     }),
