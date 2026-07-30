@@ -1,0 +1,68 @@
+---
+title: Tophhie Cloud Account
+description: The self-service portal for managing your Tophhie Cloud profile, password, sign-in methods and account security.
+sidebar:
+  label: Overview
+  order: 0
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+**[myaccount.tophhie.cloud](https://myaccount.tophhie.cloud)** is where you manage your
+Tophhie Cloud account. Update your details, change your password, add or remove ways of
+signing in, check where your account has been used, and see which apps you have.
+
+It works with the account you already use to sign in to Tophhie Cloud services. There is
+nothing extra to set up and no separate password.
+
+<CardGrid>
+	<Card title="Start here" icon="rocket">
+		Signing in, and what each part of the portal does.
+
+		[Signing in](/account/guides/signing-in/)
+	</Card>
+	<Card title="Keeping your account safe" icon="padlock">
+		Your password, sign-in methods, multi-factor authentication and where you are
+		signed in.
+
+		[Password and sign-in methods](/account/guides/password-and-sign-in-methods/)
+	</Card>
+</CardGrid>
+
+## What you can do
+
+| | |
+| --- | --- |
+| [Profile](/account/guides/your-profile/) | Your name, job title, address and preferred language |
+| [Password and sign-in methods](/account/guides/password-and-sign-in-methods/) | Change your password, add or remove sign-in methods |
+| [Multi-factor authentication](/account/guides/multi-factor-authentication/) | Turn extra sign-in security on or off |
+| [Sign-in activity](/account/guides/sign-in-activity/) | Where and when your account has been used |
+| [Apps and services](/account/guides/apps-and-services/) | Tophhie Cloud apps connected to your account |
+| [Your data](/account/guides/your-data/) | Download a copy of everything the account holds |
+
+## Why this exists
+
+Microsoft does not provide a "My Account" page for the kind of account Tophhie Cloud
+uses, so this portal fills that gap. Your account lives in Microsoft Entra External ID,
+and the portal talks to it on your behalf.
+
+That has one practical consequence worth knowing: some of what you see here comes
+straight from Microsoft, so a change can take a moment to show up, and sign-in activity
+in particular lags by a few hours.
+
+## Making it yours
+
+The portal is available in English, French, German and Spanish, and follows your device
+between light and dark appearance. Both settings are in the sidebar, and neither changes
+anything about your account itself.
+
+Your preferred language on the [Profile](/account/guides/your-profile/) page is a
+separate setting. That one tells Tophhie Cloud services which language to use when they
+contact you.
+
+## If something is wrong
+
+Email [help@tophhie.cloud](mailto:help@tophhie.cloud). If you think someone else has
+been using your account, change your password first and then
+[sign out everywhere](/account/guides/password-and-sign-in-methods/#signing-out-everywhere),
+which ends every other session immediately.

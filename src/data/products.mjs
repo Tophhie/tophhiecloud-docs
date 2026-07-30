@@ -43,6 +43,15 @@ export const products = [
 		linkText: 'Read the API docs',
 	},
 	{
+		name: 'Tophhie Cloud Account',
+		href: '/account/',
+		directory: 'account',
+		icon: 'setting',
+		description:
+			'The self-service portal at myaccount.tophhie.cloud, where you manage your Tophhie Cloud profile, password, sign-in methods and account security.',
+		linkText: 'Read the account docs',
+	},
+	{
 		name: 'Authentication for Swift',
 		href: '/authentication-swift/',
 		directory: 'authentication-swift',
