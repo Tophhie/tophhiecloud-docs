@@ -1,46 +1,55 @@
 ---
 title: Domain tools
-description: Check a domain's DNS and mail security, and list Tophhie Cloud domains.
+description: Check the DNS and mail security of a Tophhie Cloud domain, and list the domains.
 sidebar:
   order: 11
 ---
 
 ## check_domain_health
 
-Runs a full DNS and mail security health check on a domain.
+Returns the DNS and mail security posture of a Tophhie Cloud domain.
 
 | Argument | Type | Required |
 | --- | --- | --- |
 | `domain` | string, minimum 3 characters | Yes |
 
-Pass a bare domain such as `example.com`. No protocol, no path.
+Pass a bare domain such as `tophhie.cloud`. No protocol, no path.
 
-It reports on:
+:::caution[Tophhie Cloud domains only]
+This only works on domains registered in Tophhie Cloud. Anything else comes back with:
 
-- **MX records**, whether mail is routed at all
-- **DMARC**, the policy telling receivers what to do with failures
-- **SPF**, which servers may send as the domain
-- **DKIM selectors**, the signing keys published in DNS
-- **MTA-STS**, whether TLS is required for inbound mail
-- **DNSSEC**, whether DNS answers are signed
-- **TLS**
+> Domain 'example.com' is not a Tophhie Cloud domain. You can use the 'list_domains'
+> tool to get a list of all Tophhie Cloud domains.
 
-Each check comes back as pass, fail, warn or missing, with a readable explanation rather
-than a raw record dump. That distinction matters: **missing** means nothing is published,
-while **fail** means something is published and wrong. The second is usually more urgent,
-because it can break mail that currently works.
-
-This is the most useful tool here for a conversation, because an assistant can run it and
-then explain what a failing DMARC policy actually means for you.
-
-:::note
-It works on any domain, not just Tophhie Cloud ones. Everything it reads is public DNS,
-so pointing it at a domain you do not own tells you nothing you could not have looked up
-yourself.
+It is not a general-purpose domain checker. Use
+[`list_domains`](#list_domains) first if you are unsure what is covered.
 :::
+
+## What it reports
+
+| | |
+| --- | --- |
+| Registration | When the domain was registered, and whether it is the primary domain |
+| Name servers | The authoritative name servers |
+| Mail routing | MX records |
+| DMARC | The policy, such as `reject`, and the reporting contacts |
+| SPF | The policy, such as `hardfail` |
+| MTA-STS | Whether it is enabled, the enforcement mode, and the policy URL |
+| DKIM | Whether Microsoft 365 DKIM is configured |
+| DNSSEC | Whether it is enabled |
+| TLS and HTTPS | Minimum TLS version, Always Use HTTPS, HTTP/3, automatic HTTPS rewrites |
+| Abuse contact | The published abuse address |
+
+This is the most useful tool here for a conversation. An assistant can pull the current
+state and then explain what a `hardfail` SPF policy or a missing MTA-STS record actually
+means, rather than you reading raw DNS yourself.
+
+Everything it returns is published DNS and public configuration, so nothing here is
+sensitive on its own.
 
 ## list_domains
 
 Returns the domains registered in Tophhie Cloud. No arguments.
 
-Useful as a first step: ask for the list, then check the health of anything on it.
+Worth calling first. It tells you exactly which domains `check_domain_health` will accept,
+which saves a round trip through the not-a-Tophhie-Cloud-domain response.

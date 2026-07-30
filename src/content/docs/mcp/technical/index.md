@@ -75,4 +75,4 @@ map upload are both enabled on the Worker.
    factory in `src/index.ts`.
 
 The repository is public at
-[Tophhie/tophhie-cloud-mcp](https://github.com/Tophhie/tophhie-cloud-mcp).
+[Tophhie/tophhie-cloud-mcp-cf](https://github.com/Tophhie/tophhie-cloud-mcp-cf).
