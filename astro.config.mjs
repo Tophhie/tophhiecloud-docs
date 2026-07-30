@@ -89,5 +89,9 @@ export default defineConfig({
     }),
   ],
 
-  adapter: cloudflare(),
+  // Optimise images at build time with sharp rather than through Cloudflare's
+  // runtime Images binding. The site is fully prerendered, so there is no reason
+  // for the hero image to depend on a `/_image` endpoint being served correctly
+  // in production; this emits plain hashed assets under /_astro/ instead.
+  adapter: cloudflare({ imageService: 'compile' }),
 });

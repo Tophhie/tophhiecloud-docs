@@ -44,6 +44,8 @@
 	--tc-border-subtle: rgba(255, 255, 255, 0.08);
 	--tc-border: rgba(255, 255, 255, 0.1);
 	--tc-border-hi: rgba(255, 255, 255, 0.18);
+	/* Decorative background circles, per the design system's --color-bg-circle. */
+	--tc-circle: rgba(255, 255, 255, 0.035);
 
 	/* Starlight fonts */
 	--sl-font: 'DM Sans', 'Inter', sans-serif;
@@ -121,6 +123,7 @@
 	--tc-border: rgba(16, 2, 53, 0.1);
 	--tc-border-hi: rgba(16, 2, 53, 0.16);
 	--tc-accent-lo: rgba(232, 0, 90, 0.1);
+	--tc-circle: rgba(16, 2, 53, 0.045);
 
 	/* Starlight greys: light */
 	--sl-color-white: #100235;
@@ -169,6 +172,28 @@
 html,
 body {
 	background: var(--tc-app-backdrop);
+}
+
+/*
+ * Splash pages get the design system's decorative circle motif: large,
+ * low-opacity circles echoing the logomark dots, for depth without distraction.
+ * Scoped to [data-has-hero], which Starlight sets on splash pages only, so
+ * documentation pages stay plain.
+ */
+:root[data-has-hero] body {
+	background-image:
+		radial-gradient(circle 22rem at 84% 6%, var(--tc-circle) 0%, transparent 70%),
+		radial-gradient(circle 13rem at 68% 30%, var(--tc-circle) 0%, transparent 70%),
+		radial-gradient(circle 9rem at 90% 40%, var(--tc-circle) 0%, transparent 70%),
+		radial-gradient(circle 16rem at 8% 78%, var(--tc-circle) 0%, transparent 70%);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+/* The logomark sits on a soft brand-tinted disc so it reads as a deliberate
+   element rather than floating dots. */
+.hero > img {
+	background: radial-gradient(circle at 50% 50%, var(--tc-accent-lo) 0%, transparent 62%);
 }
 
 /* Nunito carries the display tier: headings and branded elements. */
