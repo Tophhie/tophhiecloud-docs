@@ -43,6 +43,15 @@ export const products = [
 		linkText: 'Read the API docs',
 	},
 	{
+		name: 'Authentication for Swift',
+		href: '/authentication-swift/',
+		directory: 'authentication-swift',
+		icon: 'padlock',
+		description:
+			'An internal Swift framework that signs iOS apps in to the Tophhie Cloud Entra External ID tenant. Used by Tophhie Cloud internally only.',
+		linkText: 'Read the framework docs',
+	},
+	{
 		name: 'Sigil',
 		href: 'https://docs.usesigil.app/',
 		icon: 'external',

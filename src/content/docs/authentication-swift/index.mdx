@@ -1,0 +1,94 @@
+---
+title: Authentication for Swift
+description: An internal Swift framework for signing iOS apps in to the Tophhie Cloud Entra External ID tenant.
+sidebar:
+  label: Overview
+  order: 0
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+:::caution[Internal framework]
+`TophhieCloudAuthentication` is used by Tophhie Cloud internally only. It is not a
+general-purpose authentication library, it is not published to any public package
+registry, and it is not supported for use outside Tophhie Cloud.
+
+It exists to sign Tophhie Cloud's own iOS apps in to the Tophhie Cloud Entra External
+ID tenant. These docs are published so that anyone working on those apps has one
+current reference, not as an invitation to adopt it.
+:::
+
+`TophhieCloudAuthentication` is a Swift package wrapping
+[MSAL](https://github.com/AzureAD/microsoft-authentication-library-for-objc) with an
+async/await API. It handles interactive sign-in, silent token refresh, the Microsoft
+Graph profile calls, self-service password reset, native sign-in and sign-up, and it
+ships a drop-in SwiftUI account screen.
+
+| | |
+| --- | --- |
+| Platform | iOS 18 and later |
+| Swift | 6.0 and later |
+| Dependency | MSAL 2.6.0 and later |
+| Tenant | Entra External ID (CIAM), `tophhiecustomers` |
+| Authority | `https://tophhiecustomers.ciamlogin.com` |
+| Repository | `Tophhie/TophhieCloudAuthentication-Swift` (private) |
+
+<CardGrid>
+	<Card title="Getting started" icon="rocket">
+		Install the package, register your app in the tenant, and configure the SDK.
+
+		[Start here](/authentication-swift/getting-started/)
+	</Card>
+	<Card title="Guides" icon="open-book">
+		Sign-in, tokens, profile editing, password reset, native sign-up and the SwiftUI
+		views.
+
+		[Read the guides](/authentication-swift/guides/)
+	</Card>
+	<Card title="API reference" icon="list-format">
+		Every public type, method and error case.
+
+		[Browse the reference](/authentication-swift/reference/)
+	</Card>
+	<Card title="Architecture" icon="setting">
+		Two independent MSAL stacks, how they differ, and the design decisions behind
+		them.
+
+		[Read about the design](/authentication-swift/reference/architecture/)
+	</Card>
+</CardGrid>
+
+## What it does
+
+Sign-in comes in two flavours, and choosing between them is the first decision you
+make.
+
+**Interactive sign-in** presents Microsoft's web UI. It is the normal path, it
+supports federated providers such as Apple, Google and Microsoft, and it needs the
+least tenant configuration.
+
+**Native authentication** renders no Microsoft UI at all. Your app supplies the
+password, code, attribute and phone-number screens, and the SDK drives the protocol
+underneath. It is what makes self-service password reset, in-app sign-up and in-app
+MFA possible, at the cost of extra tenant setup.
+
+The two live on separate objects, `TophhieAuth` and `TophhieNativeAuth`, which are
+configured independently and share no state. You can use either alone.
+
+## Beyond sign-in
+
+Once a user is signed in the framework also covers the account surface most apps end
+up needing:
+
+- Reading the profile from Microsoft Graph `/me`, and editing the fields Entra lets a
+  user change about themselves.
+- Reading the user's own sign-in history from `auditLogs/signIns`, without needing a
+  tenant-wide audit role.
+- A complete SwiftUI account screen covering profile, password change, MFA setup and
+  sign-out, which is one view to drop in if you do not want to build your own.
+
+## Getting access
+
+The repository is private. If you are working on a Tophhie Cloud app and need access,
+or you need the client ID for an app registration, ask
+[help@tophhie.cloud](mailto:help@tophhie.cloud).
