@@ -61,6 +61,15 @@ export const products = [
 		linkText: 'Read the framework docs',
 	},
 	{
+		name: 'Zero Trust Log Viewer',
+		href: '/zt-log-viewer/',
+		directory: 'zt-log-viewer',
+		icon: 'analytics',
+		description:
+			'An internal tool for querying Cloudflare Zero Trust Gateway logs, with dashboards and PDF export. Used by Tophhie Cloud internally only.',
+		linkText: 'Read the log viewer docs',
+	},
+	{
 		name: 'Sigil',
 		href: 'https://docs.usesigil.app/',
 		icon: 'external',

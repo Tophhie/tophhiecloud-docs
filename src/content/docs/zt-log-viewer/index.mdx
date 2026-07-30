@@ -1,0 +1,70 @@
+---
+title: Zero Trust Log Viewer
+description: An internal tool for querying Cloudflare Zero Trust Gateway logs, with dashboards and PDF export.
+sidebar:
+  label: Overview
+  order: 0
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+:::caution[Internal tool]
+The Zero Trust Log Viewer is used by Tophhie Cloud internally only. There is no public
+sign-up and no way to request access.
+
+It queries Cloudflare Zero Trust logs, which contain the browsing and network activity of
+people on the Tophhie Cloud network, so access is deliberately restricted to a single
+authorised administrator and enforced by Cloudflare Access. These docs are published so
+that whoever maintains it has one current reference.
+:::
+
+A single Cloudflare Worker serving a React interface and a query API over
+[Cloudflare Log Explorer](https://developers.cloudflare.com/logs/log-explorer/). It
+exists because reading Gateway logs through the Cloudflare dashboard is slow when you
+already know what you are looking for.
+
+| | |
+| --- | --- |
+| Location | `zt-logs.tophhie.cloud` |
+| Access | Cloudflare Access, single-user policy |
+| Datasets | Gateway DNS, Gateway HTTP, Gateway Network, Zero Trust Network Sessions |
+| Query limit | 1 to 500 rows |
+| Repository | `Tophhie/zt-log-viewer` (private) |
+
+<CardGrid>
+	<Card title="Guides" icon="open-book">
+		Running a query, filtering, the dashboard, and exporting to PDF.
+
+		[Start here](/zt-log-viewer/guides/)
+	</Card>
+	<Card title="Datasets" icon="list-format">
+		Every dataset and the fields you can query and filter on.
+
+		[Browse the reference](/zt-log-viewer/reference/)
+	</Card>
+</CardGrid>
+
+## What it does
+
+Two modes over the same data.
+
+**Query** returns raw log rows for a dataset, date range and optional filter, in a table
+you can sort and export. Use it when you are looking for specific events.
+
+**Dashboard** aggregates the same query into charts, showing top domains, decisions,
+devices, users, policies and the rest. Use it when you want the shape of the traffic
+rather than individual rows.
+
+Both work from the same three inputs: which dataset, which date range, and an optional
+`WHERE` clause.
+
+## A note on what is in these logs
+
+Gateway logs record which devices and which people visited which domains, which policies
+matched, and what was allowed or blocked. That is personal data about identifiable
+people, and it exists to keep the network safe rather than to watch anyone.
+
+Two practical consequences. The API token behind the tool needs Zero Trust PII read
+access to resolve emails and device names, so it is a genuinely privileged credential.
+And exports contain the same data, so a PDF from this tool deserves the same care as the
+logs themselves.
