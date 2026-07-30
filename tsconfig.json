@@ -5,12 +5,22 @@
     "**/*",
     "./worker-configuration.d.ts"
   ],
+  // Specifying `exclude` at all overrides TypeScript's default exclusion of
+  // node_modules, so it has to be listed explicitly or the `**/*` include glob
+  // sweeps in dependency sources.
+  //
+  // Note this does not silence starlight-openapi. That package ships raw .ts, and
+  // Astro's base config enables allowJs, so astro.config.mjs imports it into the
+  // program regardless of `exclude`. A bare `tsc --noEmit` therefore reports type
+  // errors from inside that package. They are upstream, not ours, and do not affect
+  // `npm run build`, which does not type-check.
   "exclude": [
-    "dist"
-],
-"compilerOptions": {
+    "dist",
+    "node_modules"
+  ],
+  "compilerOptions": {
     "types": [
-        "./worker-configuration.d.ts"
+      "./worker-configuration.d.ts"
     ]
-}
+  }
 }

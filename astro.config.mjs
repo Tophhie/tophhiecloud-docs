@@ -4,6 +4,7 @@ import starlight from '@astrojs/starlight';
 
 import cloudflare from '@astrojs/cloudflare';
 import { contributors } from './src/integrations/contributors.mjs';
+import starlightOpenAPI, { openAPISidebarGroups } from 'starlight-openapi';
 
 // https://astro.build/config
 export default defineConfig({
@@ -64,6 +65,23 @@ export default defineConfig({
         PageTitle: './src/components/PageTitle.astro',
       },
 
+      // The Tophhie Cloud API reference is generated from the live OpenAPI
+      // document rather than hand-written, so it cannot drift from the API and
+      // cannot describe more than the API already publishes at /openapi.json.
+      plugins: [
+        starlightOpenAPI([
+          {
+            base: 'tophhie-api/reference',
+            schema: 'https://api.tophhie.cloud/openapi.json',
+            sidebar: {
+              label: 'Endpoint reference',
+              collapsed: false,
+              operations: { badges: true, labels: 'path' },
+            },
+          },
+        ]),
+      ],
+
       // Scopes the sidebar below to the current product. See the file for details.
       routeMiddleware: './src/starlightRouteData.ts',
 
@@ -95,13 +113,31 @@ export default defineConfig({
           collapsed: true,
           items: [{ autogenerate: { directory: 'tophhie-social' } }],
         },
+        {
+          label: 'Tophhie Cloud API',
+          collapsed: true,
+          items: [
+            { autogenerate: { directory: 'tophhie-api' } },
+            // Replaced at build time by the generated reference groups.
+            ...openAPISidebarGroups,
+          ],
+        },
       ],
     }),
   ],
 
-  // Optimise images at build time with sharp rather than through Cloudflare's
-  // runtime Images binding. The site is fully prerendered, so there is no reason
-  // for the hero image to depend on a `/_image` endpoint being served correctly
-  // in production; this emits plain hashed assets under /_astro/ instead.
-  adapter: cloudflare({ imageService: 'compile' }),
+  adapter: cloudflare({
+    // Optimise images at build time with sharp rather than through Cloudflare's
+    // runtime Images binding. The site is fully prerendered, so there is no reason
+    // for images to depend on a `/_image` endpoint being served correctly in
+    // production; this emits plain hashed assets under /_astro/ instead.
+    imageService: 'compile',
+
+    // Prerender in Node rather than workerd. starlight-openapi renders markdown
+    // through satteri during prerender, and in workerd that resolves to satteri's
+    // wasm build, which needs WASI support workerd does not implement. Every page
+    // here is static, so nothing needs workerd semantics at build time.
+    prerenderEnvironment: 'node',
+  }),
+
 });

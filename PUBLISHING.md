@@ -307,6 +307,21 @@ under `astro dev` or `astro preview`. Test them with `npm run build` followed by
 curl -sI http://localhost:8788/my-product | head -2
 ```
 
+### Products with a generated reference
+
+The Tophhie Cloud API section mixes both kinds of page. The guides under
+`src/content/docs/tophhie-api/` are hand-written and edited like any other page. The
+endpoint reference under `/tophhie-api/reference/` is generated at build time from the
+API's own OpenAPI document and has no source files in this repository.
+
+Do not try to edit a reference page. To change what it says, change the API's OpenAPI
+document, which for the Tophhie Cloud API means changing the endpoint's schema in the
+API repository. The next build here picks it up.
+
+If a product needs the same treatment, add a `starlightOpenAPI` entry in
+`astro.config.mjs` pointing at its schema, and spread `openAPISidebarGroups` into that
+product's sidebar group alongside its `autogenerate` entry.
+
 ---
 
 ## Subsections

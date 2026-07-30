@@ -1,0 +1,99 @@
+---
+title: Tophhie Cloud API
+description: A public REST API covering Tophhie Cloud services, from domain records to Tophhie Social statistics.
+sidebar:
+  label: Overview
+  order: 0
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+The Tophhie Cloud API is a REST API running on Cloudflare Workers. It exposes data
+about Tophhie Cloud services along with a few general-purpose tools, and most of it
+needs no authentication at all.
+
+| | |
+| --- | --- |
+| Base URL | `https://api.tophhie.cloud` |
+| Development | `https://api.tophhie.dev` |
+| Version | 1.1.0 |
+| Authentication | None for public endpoints |
+| Rate limit | 500 requests per 30 seconds, per IP |
+| Support | [api-support@tophhie.cloud](mailto:api-support@tophhie.cloud) |
+
+Try it without setting anything up:
+
+```bash
+curl https://api.tophhie.cloud/health
+```
+
+<CardGrid>
+	<Card title="Getting started" icon="rocket">
+		Conventions, authentication, rate limits and error handling. Read this before
+		writing anything against the API.
+
+		[Start here](/tophhie-api/getting-started/)
+	</Card>
+	<Card title="Endpoint reference" icon="open-book">
+		Every endpoint, its parameters and its responses, generated from the API's own
+		OpenAPI document.
+
+		[Browse the reference](/tophhie-api/reference/)
+	</Card>
+</CardGrid>
+
+## What it covers
+
+The API is organised into groups, each with its own prefix:
+
+| Group | Prefix | What it does |
+| --- | --- | --- |
+| Health | `/health` | Service health check |
+| Tophhie Social | `/pds` | Repository counts, handle availability, storage usage, uptime |
+| Blog | `/blog` | Posts, authors and metadata from the Tophhie Cloud blog |
+| Domains | `/domains` | Tophhie Cloud domains and their published records |
+| Entra ID | `/entra` | Object ID and SID conversion, public tenant lookup |
+| Microsoft 365 | `/m365` | Message Center publishing (internal) |
+| Apple OS versions | `/appleosversion` | Latest OS version for a given Apple device model |
+| IP checker | `/ipcheck` | Information about an IP address |
+| Generator | `/generate` | GUIDs and timestamp ticks |
+| Policies | `/policies` | Policies applied across Tophhie Cloud |
+| Bookings | `/bookings` | Redirect to a user's Microsoft Bookings page (experimental) |
+
+:::note[One endpoint is missing from the reference]
+`GET /pds/blobStorageStats` is an alias of
+[`GET /pds/blobStorageUsageBytes`](/tophhie-api/reference/operations/get_getblobstorageusage/)
+and behaves identically. Both share an operation ID in the API's OpenAPI document, so
+the generated reference can only render one of them. Use either path.
+:::
+
+## Public and internal endpoints
+
+Most endpoints are public and unauthenticated. A small number are internal: they
+exist to let Tophhie Cloud automation drive its own infrastructure, and they require
+an API key that is not issued to third parties.
+
+Internal endpoints are documented here rather than hidden, because the API already
+publishes them in its own OpenAPI document and a reader deserves to know why a call
+returns 403 rather than guessing. They are clearly marked in the reference. See
+[Authentication](/tophhie-api/getting-started/authentication/).
+
+## Machine-readable spec
+
+The API publishes its own OpenAPI 3 document, which is what the reference on this
+site is generated from:
+
+```bash
+curl https://api.tophhie.cloud/openapi.json
+```
+
+There is also a Swagger UI at
+[api.tophhie.cloud/docs](https://api.tophhie.cloud/docs) if you would rather explore
+interactively or send test requests.
+
+## Stability
+
+This is a personal-scale API and it changes. Endpoints marked experimental, such as
+`/bookings`, may change shape or disappear. There is no deprecation policy and no
+versioned URL path, so the version number in the OpenAPI document is the only signal
+you have. Pin nothing you cannot afford to fix.

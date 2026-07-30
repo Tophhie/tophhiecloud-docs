@@ -131,6 +131,28 @@ It degrades rather than fails: no git, a shallow clone, no network or a rate-lim
 API all mean fewer names shown, never a broken build. Pages with no commits yet show
 nothing at all. Use a `.mailmap` if someone has committed under several addresses.
 
+### The API reference is generated
+
+`/tophhie-api/reference/` is not hand-written. `starlight-openapi` generates it at
+build time from `https://api.tophhie.cloud/openapi.json`, so it cannot drift from the
+API and cannot describe anything the API does not already publish. Everything else
+under `/tophhie-api/` is hand-written prose and lives in `src/content/docs` as normal.
+
+Three consequences:
+
+**Builds need network access** to `api.tophhie.cloud`. An offline build fails at the
+schema fetch.
+
+**The adapter prerenders in Node**, set by `prerenderEnvironment: 'node'` in
+`astro.config.mjs`. The generator renders markdown through `satteri` during prerender,
+and under the default workerd runtime that resolves to satteri's wasm build, which
+needs WASI support workerd does not implement. Every page here is static, so nothing
+needs workerd semantics at build time. Do not remove that option without rebuilding.
+
+**`form-data` is pinned** through an `overrides` entry in `package.json`. A transitive
+dependency of the generator pulled in a version with a CRLF injection advisory, and
+the override moves it to a patched release without downgrading the plugin.
+
 ### Search
 
 Pagefind, built from the rendered HTML at build time. It indexes every product as one
