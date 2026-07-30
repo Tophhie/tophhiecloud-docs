@@ -1,0 +1,65 @@
+---
+/**
+ * Per-page contributor list, shown under the page title.
+ *
+ * Data comes from `src/integrations/contributors.mjs` through a virtual module, so
+ * nothing here touches git or the network. If a page has no recorded history, which
+ * is true of any page not yet committed, this renders nothing at all rather than an
+ * empty panel.
+ */
+import contributorsByFile from 'virtual:tophhie/contributors';
+
+const { filePath, template } = Astro.props;
+
+const people = (filePath && contributorsByFile[filePath]) || [];
+const show = people.length > 0 && template !== 'splash';
+---
+
+{
+	show && (
+		<div class="tc-contributors" data-pagefind-ignore>
+			<span class="tc-contributors-label">Contributors</span>
+			<ul class="tc-contributors-list">
+				{people.map((person) => {
+					const label = person.login ? `@${person.login}` : person.name;
+					const title = `${person.name}, ${person.commits} ${person.commits === 1 ? 'change' : 'changes'} to this page`;
+					const inner = (
+						<>
+							{person.avatar ? (
+								<img
+									class="tc-contributors-avatar"
+									src={person.avatar}
+									alt=""
+									width="24"
+									height="24"
+									loading="lazy"
+									decoding="async"
+									referrerpolicy="no-referrer"
+								/>
+							) : (
+								<span class="tc-contributors-avatar tc-contributors-initial" aria-hidden="true">
+									{person.name.slice(0, 1)}
+								</span>
+							)}
+							<span>{label}</span>
+						</>
+					);
+
+					return (
+						<li>
+							{person.profile ? (
+								<a class="tc-contributors-person" href={person.profile} title={title}>
+									{inner}
+								</a>
+							) : (
+								<span class="tc-contributors-person" title={title}>
+									{inner}
+								</span>
+							)}
+						</li>
+					);
+				})}
+			</ul>
+		</div>
+	)
+}

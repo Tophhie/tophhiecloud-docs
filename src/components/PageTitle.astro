@@ -1,0 +1,16 @@
+---
+/**
+ * Starlight's page title, with the contributor list appended underneath.
+ *
+ * Overriding PageTitle rather than the footer keeps the credit next to the thing it
+ * credits. The default component is rendered unchanged, so heading styles and the
+ * `#_top` anchor Starlight relies on stay exactly as they were.
+ */
+import Default from '@astrojs/starlight/components/PageTitle.astro';
+import Contributors from './Contributors.astro';
+
+const { entry } = Astro.locals.starlightRoute;
+---
+
+<Default><slot /></Default>
+<Contributors filePath={entry.filePath} template={entry.data.template} />

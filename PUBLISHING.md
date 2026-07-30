@@ -89,6 +89,16 @@ Not sure a change is wanted? [Open an
 issue](https://github.com/Tophhie/tophhiecloud-docs/issues/new) and ask before
 writing it.
 
+### You get credited
+
+Every page lists the people who have edited it, under the title, with avatars linking
+to their GitHub profiles. It is built from the git history of that specific file, so
+once your pull request is merged your name appears on the pages you touched at the
+next deploy. Nothing to sign up for and nothing to add to a list.
+
+If you have committed under more than one email address and want them collapsed into
+one entry, add yourself to a `.mailmap` in the repository root.
+
 ---
 
 ## The three levels

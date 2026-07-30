@@ -3,12 +3,17 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 import cloudflare from '@astrojs/cloudflare';
+import { contributors } from './src/integrations/contributors.mjs';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://docs.tophhie.cloud',
 
   integrations: [
+    // Builds the per-page contributor map from git history. See the file for why
+    // this is an integration rather than something a component does directly.
+    contributors(),
+
     starlight({
       title: 'Tophhie Cloud Docs',
       description:
@@ -53,6 +58,11 @@ export default defineConfig({
       lastUpdated: true,
 
       customCss: ['./src/styles/tophhie.css'],
+
+      // Appends the per-page contributor list under the page title.
+      components: {
+        PageTitle: './src/components/PageTitle.astro',
+      },
 
       // Scopes the sidebar below to the current product. See the file for details.
       routeMiddleware: './src/starlightRouteData.ts',

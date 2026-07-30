@@ -107,6 +107,30 @@ cannot walk from one product into another.
 
 You should not need to touch it to write docs.
 
+### Contributors
+
+Each page lists the people who have edited it, under the title.
+[`src/integrations/contributors.mjs`](./src/integrations/contributors.mjs) builds the
+map at build time and hands it to
+[`src/components/Contributors.astro`](./src/components/Contributors.astro) through a
+virtual module, so no component ever touches git or the network.
+
+Two details are worth knowing if you change it. Git runs in the integration rather
+than in a component because components are bundled for the Worker, and
+`node:child_process` has no business being in that bundle. And GitHub profiles are
+resolved once per unique contributor rather than once per page, because the naive
+version costs one API request per page and would exhaust the unauthenticated limit of
+60 per hour within a few builds.
+
+Anyone committing from a GitHub noreply address needs no API request at all, since
+their user ID and login are already in the address. For everyone else it is one
+request per person per build. Set `GITHUB_TOKEN` if that ever becomes a problem,
+though with a handful of contributors it will not.
+
+It degrades rather than fails: no git, a shallow clone, no network or a rate-limited
+API all mean fewer names shown, never a broken build. Pages with no commits yet show
+nothing at all. Use a `.mailmap` if someone has committed under several addresses.
+
 ### Search
 
 Pagefind, built from the rendered HTML at build time. It indexes every product as one
