@@ -1,0 +1,65 @@
+---
+title: Tophhie Cloud Docs
+description: The knowledge base you are reading, how it is built, and how to write for it.
+sidebar:
+  label: Overview
+  order: 0
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+This is the site you are on. It documents every Tophhie Cloud product in one place, with
+one search box across all of them, and it is open source: anything wrong on any page can be
+fixed by whoever spots it.
+
+Documenting itself is not a joke at its own expense. The conventions below are the reason
+ten product sections look like one site rather than ten, and they only hold if they are
+written down somewhere a contributor will find them.
+
+| | |
+| --- | --- |
+| Lives at | [docs.tophhie.cloud](https://docs.tophhie.cloud) |
+| Built with | Astro and Starlight |
+| Hosted on | Cloudflare Workers static assets |
+| Source | [Tophhie/tophhiecloud-docs](https://github.com/Tophhie/tophhiecloud-docs) |
+| Search | Pagefind, built at deploy time |
+
+<CardGrid>
+	<Card title="Fix something" icon="pencil">
+		Every page has an edit link. Small corrections need no local setup at all.
+
+		[Contributing](/knowledge-base/contributing/)
+	</Card>
+	<Card title="Write a page" icon="document">
+		Frontmatter, ordering, and how to add a product or a section.
+
+		[Authoring](/knowledge-base/authoring/)
+	</Card>
+</CardGrid>
+
+## How it is put together
+
+Each product owns a folder under `src/content/docs/`, and readers only ever see the sidebar
+for the product they are in. Search deliberately works the other way round and covers
+everything at once, because people rarely know which product owns their answer before they
+look for it.
+
+That split is the central idea of the site. [How it works](/knowledge-base/how-it-works/)
+covers the mechanics.
+
+## One list, not several
+
+Products are declared once, in `src/data/products.mjs`. The sidebar, the header switcher and
+the landing page cards are all built from it.
+
+They used to be maintained separately and drifted apart within a day, which is the entire
+argument for the current arrangement. Adding a product means adding an entry there and
+creating its folder, and everything else follows.
+
+## Where to go next
+
+| | |
+| --- | --- |
+| [Contributing](/knowledge-base/contributing/) | Fixing a page, larger changes, local setup |
+| [Authoring](/knowledge-base/authoring/) | Frontmatter, adding content, ordering and links |
+| [How it works](/knowledge-base/how-it-works/) | Sidebars, search, deployment |

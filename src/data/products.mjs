@@ -121,6 +121,15 @@ export const products = [
 		linkText: 'Read the log viewer docs',
 	},
 	{
+		name: 'Tophhie Cloud Docs',
+		href: '/knowledge-base/',
+		directory: 'knowledge-base',
+		icon: 'open-book',
+		description:
+			'This knowledge base itself: how it is built, how to write for it, and how to fix a page you find wrong. Open source, and corrections are welcome from anyone.',
+		linkText: 'Read the docs docs',
+	},
+	{
 		name: 'PrivPass Password Manager',
 		href: '/privpass/',
 		directory: 'privpass',

@@ -1,10 +1,23 @@
 # Publishing to the Tophhie Cloud knowledge base
 
+> **This guide is now published on the site itself, at
+> <https://docs.tophhie.cloud/knowledge-base/>.**
+>
+> Prefer it: it is searchable alongside everything else, it is navigable rather than
+> being one long file, and it is the copy that gets kept current.
+>
+> | Looking for | Go to |
+> | --- | --- |
+> | Fixing a page, local setup | <https://docs.tophhie.cloud/knowledge-base/contributing/> |
+> | Frontmatter, adding content, ordering | <https://docs.tophhie.cloud/knowledge-base/authoring/> |
+> | Sidebars, search, deployment | <https://docs.tophhie.cloud/knowledge-base/how-it-works/> |
+>
+> What follows is retained for reference and for anyone working offline. Where the two
+> disagree, the site is right.
+
 Everything on <https://docs.tophhie.cloud> comes from Markdown files in
 `src/content/docs/`. There is no CMS and no database. The folder layout is the site
 structure, and the sidebar is generated from it.
-
-Read this before adding, editing, or removing content.
 
 Anyone can contribute. This repository is public and pull requests are welcome from
 outside the Tophhie Cloud org, and [Contributing](#contributing) has the quickest

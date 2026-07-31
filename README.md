@@ -27,10 +27,13 @@ any page on the site. It opens that page's Markdown file in the GitHub editor, a
 GitHub handles the fork and the pull request for you, so there is no local setup
 needed.
 
-For anything larger, read [PUBLISHING.md](./PUBLISHING.md). It is the authoring guide,
-covering how to add, edit and remove sections, subsections and articles, plus the
-frontmatter reference, sidebar ordering, house style, and the checks to run before
-opening a pull request.
+For anything larger, read the authoring guide, which is published on the site at
+**<https://docs.tophhie.cloud/knowledge-base/>**. It covers how to add, edit and remove
+sections, subsections and articles, plus the frontmatter reference, sidebar ordering,
+house style, and the checks to run before opening a pull request.
+
+[PUBLISHING.md](./PUBLISHING.md) is the older copy of the same material, kept for offline
+reference. Where the two disagree, the site is right.
 
 If you are not sure a change is wanted,
 [open an issue](https://github.com/Tophhie/tophhiecloud-docs/issues/new) first.
