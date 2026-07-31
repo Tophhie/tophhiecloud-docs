@@ -61,6 +61,15 @@ export const products = [
 		linkText: 'Read the MCP docs',
 	},
 	{
+		name: 'Redirect Service',
+		href: '/redirect-service/',
+		directory: 'redirect-service',
+		icon: 'random',
+		description:
+			'Short links on aka.tophhie.cloud, with a published index anyone can browse. Creating and managing links is internal to Tophhie Cloud.',
+		linkText: 'Read the Redirect Service docs',
+	},
+	{
 		name: 'Tophhie Cloud Account',
 		href: '/account/',
 		directory: 'account',

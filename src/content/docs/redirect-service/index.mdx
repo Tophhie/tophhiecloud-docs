@@ -1,0 +1,62 @@
+---
+title: Redirect Service
+description: Short links on aka.tophhie.cloud, and the portal Tophhie Cloud staff use to manage them.
+sidebar:
+  label: Overview
+  order: 0
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+The Tophhie Cloud Redirect Service turns long URLs into short ones. A link like
+`https://aka.tophhie.cloud/devops` sends whoever opens it to the full address behind it,
+which is easier to say out loud, put on a slide, or print than the real thing.
+
+| | |
+| --- | --- |
+| Short links | `https://aka.tophhie.cloud/<name>` |
+| Also served on | `https://aka.tophhie.dev/<name>` |
+| Public index | [aka.tophhie.cloud/index](https://aka.tophhie.cloud/index) |
+| Managing links | Tophhie Cloud staff only |
+
+<CardGrid>
+	<Card title="Following a link" icon="rocket">
+		What happens when you open one, and what the errors mean.
+
+		[Using redirects](/redirect-service/using/)
+	</Card>
+	<Card title="Managing links" icon="setting">
+		The admin portal, who can sign in, and how a link is created.
+
+		[Managing redirects](/redirect-service/managing/)
+	</Card>
+</CardGrid>
+
+## Two halves
+
+The service is two separate pieces, and it helps to know which one you are dealing with.
+
+The **public service** answers `aka.tophhie.cloud` and does the redirecting. Anyone can use
+it. There is nothing to sign in to and nothing to install: you open a short link and it
+sends you on.
+
+The **admin portal** is where links are created and edited. It is internal to Tophhie
+Cloud, sits behind a Microsoft Entra sign-in, and is not open for public sign-up. If you
+want a short link created, ask rather than looking for a sign-up page.
+
+## Why the links look like that
+
+Short names are lowercase letters, numbers, hyphens and underscores. One segment only, so
+`aka.tophhie.cloud/devops` works and `aka.tophhie.cloud/team/devops` does not.
+
+That constraint is deliberate. A short link is meant to survive being read aloud, written
+on a whiteboard and retyped from a photograph, and every extra character is another chance
+to get it wrong.
+
+## Where to go next
+
+| | |
+| --- | --- |
+| [Using redirects](/redirect-service/using/) | Following links, the public index, and what each error means |
+| [Managing redirects](/redirect-service/managing/) | The portal, link states, and the admin API |
+| [Technical](/redirect-service/technical/) | How it is built, what gets logged, and the rate limit |
