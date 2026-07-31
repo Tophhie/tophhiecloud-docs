@@ -29,7 +29,9 @@ individual call.
 
 ## Getting help
 
-Email [api-support@tophhie.cloud](mailto:api-support@tophhie.cloud) or use
-[support.tophhie.cloud](https://support.tophhie.cloud). Include the
-`X-TC-API-Trace-Id` from the response header if you are reporting a problem with a
-specific request, since it identifies that exact call in the logs.
+Email [api-support@tophhie.cloud](mailto:api-support@tophhie.cloud) for anything specific to
+the API, or [help@tophhie.cloud](mailto:help@tophhie.cloud) for anything else. See
+[Get support](/support/).
+
+Include the `X-TC-API-Trace-Id` from the response header if you are reporting a problem with
+a specific request, since it identifies that exact call in the logs.
