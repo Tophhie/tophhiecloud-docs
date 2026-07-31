@@ -105,16 +105,20 @@
 }
 
 :root[data-theme='light'] {
-	/* Surfaces: light */
+	/* Surfaces: light.
+	   The two lavenders are swapped relative to the original: the deeper one sits
+	   on the chrome and the lighter one on the reading column. That separates
+	   navigation from content and lifts the text slightly, without going to white,
+	   which is harsh at this size of page. Dark mode does the opposite on purpose:
+	   there the chrome matches the page so it recedes. */
 	--tc-bg: #f4f2fa;
 	--tc-surface: #ffffff;
 	--tc-surface-hi: #ece7f6;
-	--tc-app-backdrop: #ece8f5;
-	/* The design system's --header-bg/--sidebar-bg are translucent white, which
-	   reads as a white slab against this page's lavender backdrop. Use the page
-	   colour, opaque, so the chrome disappears instead. */
-	--tc-nav-bg: #f4f2fa;
-	--tc-sidebar-bg: #f4f2fa;
+	--tc-app-backdrop: #f4f2fa;
+	/* Header and left nav only. The right-hand "On this page" rail deliberately
+	   keeps the content colour so it belongs to the content it indexes. */
+	--tc-nav-bg: #ece8f5;
+	--tc-sidebar-bg: #ece8f5;
 	--tc-fill-1: rgba(16, 2, 53, 0.04);
 	--tc-fill-2: rgba(16, 2, 53, 0.055);
 	--tc-fill-3: rgba(16, 2, 53, 0.08);
@@ -167,8 +171,11 @@
 	--sl-shadow-lg: 0 8px 32px rgba(16, 2, 53, 0.14);
 }
 
-/* The design system asks for a backdrop slightly deeper than --bg so the
-   surface colour never flashes during load. */
+/* The design system asks for a backdrop slightly deeper than --bg so the surface
+   colour never flashes during load, which is what dark mode does. Light mode
+   keeps the two equal on purpose: the main pane is transparent, so body IS the
+   reading column's background, and it has to match --tc-bg for the content to
+   read as one surface. The contrast there comes from the chrome instead. */
 html,
 body {
 	background: var(--tc-app-backdrop);
