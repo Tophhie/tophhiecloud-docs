@@ -1,0 +1,69 @@
+---
+title: Zero Trust Block Page
+description: A modern replacement for the default Cloudflare Zero Trust block page, ready to brand as your own.
+sidebar:
+  label: Overview
+  order: 0
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+When Cloudflare Zero Trust blocks a request, it shows a block page. This is a replacement
+for the default one: a small SvelteKit app that explains what happened, shows the details
+Cloudflare passed along, and gives the person a way to ask for access.
+
+It is open source and built to be taken. Clone it, change a handful of strings, point it at
+your own logo and support address, and it is your organisation's block page.
+
+| | |
+| --- | --- |
+| Repository | [Tophhie/cf-zero-trust-blockpage](https://github.com/Tophhie/cf-zero-trust-blockpage) |
+| Built with | SvelteKit, Tailwind CSS |
+| Output | A static site, deployed to Cloudflare Workers |
+| Adapting it | Edit one config file |
+
+<CardGrid>
+	<Card title="Deploy it" icon="rocket">
+		Clone, configure, build and put it on Cloudflare.
+
+		[Getting started](/block-page/getting-started/)
+	</Card>
+	<Card title="Make it yours" icon="pencil">
+		The wording, the logo, the support links and the styling.
+
+		[Customising](/block-page/customising/)
+	</Card>
+</CardGrid>
+
+## What the page does
+
+Cloudflare appends details about the block to the URL as query parameters. The page reads
+them, shows the person a plain explanation, and puts the technical detail behind a
+**details** panel rather than in their face.
+
+From there they can:
+
+- **Request access**, which opens their mail client with every detail of the block already
+  written into the body, addressed to your support address.
+- **Go to your support website**, from a button in the corner.
+
+The point of the mail button is that it removes the worst part of being blocked. Instead of
+someone describing "a website was blocked, I think, earlier", your support inbox gets the
+rule ID, the site, the device and the timestamp, already filled in.
+
+## It degrades sensibly
+
+The page can be opened with no parameters at all, which happens if somebody visits the URL
+directly or Cloudflare passes nothing along. It detects that and shows a shorter message
+instead, with no empty details panel and no broken fields.
+
+Individual missing values are handled the same way: a row only appears if it has something
+in it, so you never get a screen of blank labels.
+
+## Where to go next
+
+| | |
+| --- | --- |
+| [Getting started](/block-page/getting-started/) | Clone, build, deploy, and point Cloudflare at it |
+| [Customising](/block-page/customising/) | Wording, branding and styling |
+| [Reference](/block-page/reference/) | Every parameter the page understands |

@@ -70,6 +70,15 @@ export const products = [
 		linkText: 'Read the Redirect Service docs',
 	},
 	{
+		name: 'Zero Trust Block Page',
+		href: '/block-page/',
+		directory: 'block-page',
+		icon: 'seti:svelte',
+		description:
+			'An open-source replacement for the default Cloudflare Zero Trust block page. Clone it, change one config file, and it is your organisation’s.',
+		linkText: 'Read the Block Page docs',
+	},
+	{
 		name: 'Tophhie Cloud Account',
 		href: '/account/',
 		directory: 'account',
