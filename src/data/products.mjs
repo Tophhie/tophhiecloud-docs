@@ -25,6 +25,13 @@
  *                                  nobody works through a guide for something they cannot get.
  *                                  Set it only where the whole product is internal: a public
  *                                  product with a staff-only admin area is not internal.
+ * @property {boolean} [discontinued] True for products no longer maintained. Badges the card
+ *                                  and groups the product separately, so nobody adopts
+ *                                  something that will not get fixes. The docs stay up: people
+ *                                  already using it need them more than anyone, not least to
+ *                                  get their data out. Takes precedence over `internal` when
+ *                                  both are set, because "do not adopt this" is the more
+ *                                  useful warning.
  */
 
 /** @type {Product[]} */
@@ -112,6 +119,16 @@ export const products = [
 		description:
 			'An internal tool for querying Cloudflare Zero Trust Gateway logs, with dashboards and PDF export. Used by Tophhie Cloud internally only.',
 		linkText: 'Read the log viewer docs',
+	},
+	{
+		name: 'PrivPass Password Manager',
+		href: '/privpass/',
+		directory: 'privpass',
+		discontinued: true,
+		icon: 'seti:lock',
+		description:
+			'An iOS password manager with AES-GCM encrypted secrets, iCloud sync and AutoFill. No longer maintained: the docs cover its security model in full, including its weaknesses, and how to move your data out.',
+		linkText: 'Read the PrivPass docs',
 	},
 	{
 		name: 'Sigil',

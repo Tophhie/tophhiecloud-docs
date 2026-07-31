@@ -1,0 +1,65 @@
+---
+title: PrivPass Password Manager
+description: An iOS password manager with AES-GCM encrypted secrets, iCloud sync and AutoFill. No longer maintained.
+sidebar:
+  label: Overview
+  order: 0
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+PrivPass is an iOS password manager. It stores passwords, payment cards and one-time-code
+tokens, encrypts the secret parts with AES-GCM, syncs across your devices through your own
+iCloud account, and fills credentials through the iOS AutoFill system.
+
+:::danger[No longer maintained]
+PrivPass has received no updates since **May 2025** and is not actively developed.
+
+An unmaintained password manager is a different proposition from an unmaintained note-taking
+app. It will not receive security fixes, it will not be updated for changes in iOS, and the
+weaknesses described in [Limitations](/privpass/security/limitations/) will not be
+addressed.
+
+If you are choosing a password manager today, choose a maintained one. This documentation
+exists so that people already holding a PrivPass vault understand exactly what protects
+their data, and can [get it out](/privpass/using/import-and-export/).
+:::
+
+<CardGrid>
+	<Card title="How it protects your data" icon="approve-check">
+		The encryption, what is covered, and what is not.
+
+		[Security model](/privpass/security/)
+	</Card>
+	<Card title="Using it" icon="open-book">
+		The vault, the generator, AutoFill and getting data out.
+
+		[Using PrivPass](/privpass/using/)
+	</Card>
+</CardGrid>
+
+## What it does
+
+| | |
+| --- | --- |
+| Stores | Passwords, payment cards, TOTP tokens, folders |
+| Encrypts | The secret values, with AES-GCM |
+| Syncs | Through your own iCloud account |
+| Fills | Through the iOS AutoFill Credential Provider |
+| Extras | Password generator, strength meter, Home Screen widget, Siri shortcuts |
+
+## Read the security pages before trusting it
+
+The [security model](/privpass/security/) is documented in detail, including the parts that
+are weaker than a modern password manager should be. Two things in particular are worth
+knowing before you rely on PrivPass for anything important:
+
+- The key is derived from your master password with a **single HMAC-SHA256 operation**
+  rather than a slow password hashing function, which offers little resistance to an
+  offline guessing attack.
+- Only the **secret values** are encrypted. Item names, usernames, website addresses and
+  notes are stored and synced in plain text.
+
+Neither is a reason to panic if you are using it today, and both are reasons not to adopt
+it now. [Limitations](/privpass/security/limitations/) explains what each one means in
+practice.

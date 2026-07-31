@@ -28,9 +28,10 @@ everything at once.
 	{
 		products.map((product) => (
 			<Card title={product.name} icon={product.icon}>
-				{product.internal && (
+				{(product.discontinued || product.internal) && (
 					<p class="tc-card-badge">
-						<Badge text="Internal" variant="caution" />
+						{product.discontinued && <Badge text="Discontinued" variant="danger" />}
+						{product.internal && <Badge text="Internal" variant="caution" />}
 					</p>
 				)}
 
