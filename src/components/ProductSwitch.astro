@@ -25,6 +25,10 @@ const { id } = Astro.locals.starlightRoute;
 const currentDirectory = id.split('/')[0];
 const onAProduct = products.some((product) => product.directory === currentDirectory);
 
+// Internal products are suffixed here rather than only grouped by the script below, so
+// the distinction survives with JavaScript off. The script strips the suffix once it has
+// moved the option under an "Internal" optgroup, which says the same thing once instead
+// of twice.
 const options = [
 	{
 		label: 'All products',
@@ -32,14 +36,16 @@ const options = [
 		selected: !onAProduct,
 	},
 	...products.map((product) => ({
-		label: product.name,
+		label: product.internal ? `${product.name} (Internal)` : product.name,
 		value: product.href,
 		selected: product.directory === currentDirectory,
 	})),
 ];
+
+const internalHrefs = products.filter((product) => product.internal).map((product) => product.href);
 ---
 
-<tc-product-switch class="tc-product-switch">
+<tc-product-switch class="tc-product-switch" data-internal={JSON.stringify(internalHrefs)}>
 	<Select icon="bars" label="Select a product" options={options} width="11.5em" />
 </tc-product-switch>
 
@@ -48,6 +54,7 @@ const options = [
 		constructor() {
 			super();
 			const select = this.querySelector('select');
+			if (select) this.groupOptions(select);
 			select?.addEventListener('change', (event) => {
 				if (event.currentTarget instanceof HTMLSelectElement) {
 					// Values are either a root-relative path or an absolute URL for a
@@ -55,6 +62,49 @@ const options = [
 					window.location.href = event.currentTarget.value;
 				}
 			});
+		}
+
+		/**
+		 * Split the flat option list into "Public" and "Internal" groups.
+		 *
+		 * Starlight's Select renders plain options and has no way to express groups, so
+		 * they are built here instead of forking the component. "All products" stays
+		 * ungrouped at the top, because it is a reset rather than a product.
+		 */
+		groupOptions(select: HTMLSelectElement) {
+			let internal: string[] = [];
+			try {
+				internal = JSON.parse(this.dataset.internal || '[]');
+			} catch {
+				return; // Malformed data: leave the flat list, which still reads correctly.
+			}
+			if (internal.length === 0) return;
+
+			const options = [...select.querySelectorAll('option')];
+			const products = options.filter((option) => option.value !== '/');
+			if (products.length === 0) return;
+
+			const groupFor = (label: string) => {
+				const group = document.createElement('optgroup');
+				group.label = label;
+				return group;
+			};
+			const publicGroup = groupFor('Public');
+			const internalGroup = groupFor('Internal');
+
+			for (const option of products) {
+				if (internal.includes(option.value)) {
+					// The group label now carries the distinction, so drop the suffix that
+					// exists for the no-JavaScript case.
+					option.textContent = option.textContent?.replace(/\s*\(Internal\)$/, '') ?? '';
+					internalGroup.append(option);
+				} else {
+					publicGroup.append(option);
+				}
+			}
+
+			if (publicGroup.children.length > 0) select.append(publicGroup);
+			if (internalGroup.children.length > 0) select.append(internalGroup);
 		}
 	}
 

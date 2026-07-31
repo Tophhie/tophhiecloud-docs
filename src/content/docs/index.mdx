@@ -15,7 +15,7 @@ hero:
       icon: down-arrow
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Badge, Card, CardGrid } from '@astrojs/starlight/components';
 import { products } from '../../data/products.mjs';
 
 ## Product docs
@@ -28,6 +28,12 @@ everything at once.
 	{
 		products.map((product) => (
 			<Card title={product.name} icon={product.icon}>
+				{product.internal && (
+					<p class="tc-card-badge">
+						<Badge text="Internal" variant="caution" />
+					</p>
+				)}
+
 				{product.description}
 
 				<p>

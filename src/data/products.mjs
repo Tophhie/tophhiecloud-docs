@@ -19,6 +19,12 @@
  * @property {string} [directory]   Folder under src/content/docs/. Omit if hosted elsewhere.
  * @property {boolean} [reference]  True if the product also has a generated OpenAPI reference.
  * @property {string} [linkText]    Card link text. Defaults to "Read the docs".
+ * @property {boolean} [internal]   True for products that are not open to public sign-up or
+ *                                  use. Adds an "Internal" badge to the landing page card and
+ *                                  groups the product separately in the header switcher, so
+ *                                  nobody works through a guide for something they cannot get.
+ *                                  Set it only where the whole product is internal: a public
+ *                                  product with a staff-only admin area is not internal.
  */
 
 /** @type {Product[]} */
@@ -91,6 +97,7 @@ export const products = [
 		name: 'Authentication for Swift',
 		href: '/authentication-swift/',
 		directory: 'authentication-swift',
+		internal: true,
 		icon: 'padlock',
 		description:
 			'An internal Swift framework that signs iOS apps in to the Tophhie Cloud Entra External ID tenant. Used by Tophhie Cloud internally only.',
@@ -100,6 +107,7 @@ export const products = [
 		name: 'Zero Trust Log Viewer',
 		href: '/zt-log-viewer/',
 		directory: 'zt-log-viewer',
+		internal: true,
 		icon: 'analytics',
 		description:
 			'An internal tool for querying Cloudflare Zero Trust Gateway logs, with dashboards and PDF export. Used by Tophhie Cloud internally only.',

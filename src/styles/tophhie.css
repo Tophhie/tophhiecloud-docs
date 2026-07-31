@@ -181,6 +181,13 @@ body {
 	background: var(--tc-app-backdrop);
 }
 
+/* Landing-page product cards: the "Internal" badge sits between the title and the
+   description, so it needs to read as a label on the card rather than as a paragraph
+   of its own. Pull it up against the title and keep it clear of the text below. */
+.tc-card-badge {
+	margin-block: 0 0.5rem;
+}
+
 /*
  * Splash pages get the design system's decorative circle motif: large,
  * low-opacity circles echoing the logomark dots, for depth without distraction.
