@@ -44,7 +44,7 @@ there is nothing to pay or manage.
 ## Refunds
 
 Refunds are covered by the Marvelist refund policy at
-[trust.tophhie.cloud](https://trust.tophhie.cloud/). App Store purchases are refunded by
+[Marvelist refund policy](https://trust.tophhie.cloud/policy/ml-refund-policy). App Store purchases are refunded by
 Apple rather than by Marvelist.
 
 ## Deleting your account while subscribed

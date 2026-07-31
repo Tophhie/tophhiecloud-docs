@@ -53,6 +53,12 @@ Worth knowing before you protect a list you were relying on the assistant to hel
 The protection is not selective: encrypted means encrypted, including from the features you
 like.
 
+## How the encryption works
+
+Marvelist publishes a [Vault Security policy](https://trust.tophhie.cloud/policy/ml-vault-security)
+setting out what Vault protection does and does not cover. Worth reading before you rely on
+it for something genuinely sensitive, rather than taking this page's summary for it.
+
 ## Managing your recovery code
 
 **Profile → Vault** holds two actions: **New recovery code** generates a replacement, and

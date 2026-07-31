@@ -57,7 +57,7 @@ is no way to recover the account afterwards.
 
 Your account itself lives in Microsoft Entra External ID. What is stored, and for how
 long, is covered by the
-[Tophhie Cloud privacy policy](https://trust.tophhie.cloud/) rather than by this page.
+[Tophhie Cloud privacy policy](https://trust.tophhie.cloud/policy/privacy) rather than by this page.
 
 The portal itself keeps no copy of your data. Everything shown is fetched from Microsoft
 when you load the page, which is why some of it can be a few hours out of date. See

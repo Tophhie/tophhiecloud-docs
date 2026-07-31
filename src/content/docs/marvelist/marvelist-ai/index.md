@@ -36,7 +36,7 @@ which are encrypted and kept from the assistant entirely.
 Marvelist's published position is that the assistant only sees the data needed to answer
 your question, and that your content is never used to train models.
 
-Tophhie Cloud's [Responsible AI Policy](https://trust.tophhie.cloud/) covers the wider
+Tophhie Cloud's [Responsible AI Policy](https://trust.tophhie.cloud/policy/responsible-ai-policy) covers the wider
 position, including the parts worth knowing: AI interactions may be logged for quality,
 security and reliability, and AI output is assistive rather than authoritative, so you are
 expected to check anything you act on.

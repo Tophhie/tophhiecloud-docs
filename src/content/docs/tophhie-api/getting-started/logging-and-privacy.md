@@ -34,7 +34,7 @@ responses.
 ## Retention
 
 Logged data is retained in accordance with the
-[Tophhie Cloud privacy policy](https://trust.tophhie.cloud/). This page describes
+[Tophhie Cloud privacy policy](https://trust.tophhie.cloud/policy/privacy). This page describes
 what is collected, not how long it is kept.
 
 ## Rate limiting data
